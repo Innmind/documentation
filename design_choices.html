@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>innmind/documentation</title>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/main.css"/>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/styles/default.css"/>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/styles/atom-one-dark.css"/>
+    <script src="https://innmind.github.io/documentation/static/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <header>
+        <a href="https://innmind.github.io/documentation/"><code>documentation</code></a>
+    </header>
+    <aside>
+        <ul>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/index.html">
+                        Overview
+                    </a>
+                            </li>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/goals.html">
+                        Goals
+                    </a>
+                            </li>
+                    <li class="current">
+                                    <a href="https://innmind.github.io/documentation/design_choices.html">
+                        Design choices
+                    </a>
+                            </li>
+                    <li>
+                                    <details>
+                        <summary>
+                                                            Applications
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/applications/library.html">
+                                        Library
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/applications/crawler.html">
+                                        Crawler
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <details>
+                        <summary>
+                                                            Developer tools
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/blackbox.html">
+                                        BlackBox
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/dependency_graph.html">
+                                        Dependency graph
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/git_release.html">
+                                        Git release
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/kalmiya.html">
+                                        Kalmiya
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/lab_station.html">
+                                        Lab station
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/profiler.html">
+                                        Profiler
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/silent_cartographer.html">
+                                        Silent cartographer
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/warden.html">
+                                        Warden
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <details>
+                        <summary>
+                                                            High level APIs
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/crawler.html">
+                                        Crawler
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/ipc.html">
+                                        Inter Process Communication
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/operating_system.html">
+                                        Operating system
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/process_manager.html">
+                                        Process manager
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/packages.html">
+                        Packages
+                    </a>
+                            </li>
+                </ul>
+    </aside>
+    <main><h1 id="design-choices"><a href="#design-choices" class="anchor">#</a>Design choices</h1>
+<p>All packages created in this organization are here to advance toward the <a href="goals.html">defined goals</a> of the whole project. This means that all the APIs are designed to help this problem first. But they're also designed in a way so they can help other projects to solve recurring problems (since the <a href="goals.html#long-term">long term goal</a> may not be reachable).</p>
+<p>All packages evolution follow the same steps (always in this order):</p>
+<ul>
+<li>make it work</li>
+<li>make it simple</li>
+<li>make it fast</li>
+</ul>
+<p>This organization puts an emphasis on the second step as it helps with another core principle:</p>
+<blockquote>
+<p>make it easy to use it right, make it hard to use it wrong</p>
+</blockquote>
+<p>This results in APIs with very low use of primitive types as this strategy generally brings too many implicits. The resulting design is a mix between object oriented programming and functional programming (similar to <a href="https://scala-lang.org/">Scala</a> or <a href="https://www.ponylang.io/">Pony</a>).</p>
+<p>The last step, <code>make it fast</code>, is not a real priority as there is still plenty of packages to build in order to reach the organization <a href="goals.html">goals</a>. However this doesn't mean speed is sacrified for the sake of simplicity.</p></main>
+    <footer>
+        <a href="https://github.com/innmind/documentation/" target="_blank">GitHub</a>
+    </footer>
+</body>
+</html>

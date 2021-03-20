@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>innmind/documentation</title>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/main.css"/>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/styles/default.css"/>
+    <link rel="stylesheet" href="https://innmind.github.io/documentation/static/styles/atom-one-dark.css"/>
+    <script src="https://innmind.github.io/documentation/static/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <header>
+        <a href="https://innmind.github.io/documentation/"><code>documentation</code></a>
+    </header>
+    <aside>
+        <ul>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/index.html">
+                        Overview
+                    </a>
+                            </li>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/goals.html">
+                        Goals
+                    </a>
+                            </li>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/design_choices.html">
+                        Design choices
+                    </a>
+                            </li>
+                    <li>
+                                    <details>
+                        <summary>
+                                                            Applications
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/applications/library.html">
+                                        Library
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/applications/crawler.html">
+                                        Crawler
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <details>
+                        <summary>
+                                                            Developer tools
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/blackbox.html">
+                                        BlackBox
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/dependency_graph.html">
+                                        Dependency graph
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/git_release.html">
+                                        Git release
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/kalmiya.html">
+                                        Kalmiya
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/lab_station.html">
+                                        Lab station
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/profiler.html">
+                                        Profiler
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/silent_cartographer.html">
+                                        Silent cartographer
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/tools/warden.html">
+                                        Warden
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <details open>
+                        <summary>
+                                                            High level APIs
+                                                    </summary>
+                        <ul>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/crawler.html">
+                                        Crawler
+                                    </a>
+                                </li>
+                                                            <li class="sub-item current">
+                                    <a href="https://innmind.github.io/documentation/apis/ipc.html">
+                                        Inter Process Communication
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/operating_system.html">
+                                        Operating system
+                                    </a>
+                                </li>
+                                                            <li class="sub-item ">
+                                    <a href="https://innmind.github.io/documentation/apis/process_manager.html">
+                                        Process manager
+                                    </a>
+                                </li>
+                                                    </ul>
+                    </details>
+                            </li>
+                    <li>
+                                    <a href="https://innmind.github.io/documentation/packages.html">
+                        Packages
+                    </a>
+                            </li>
+                </ul>
+    </aside>
+    <main><h1 id="inter-process-communication-ipc"><a href="#inter-process-communication-ipc" class="anchor">#</a>Inter Process Communication (IPC)</h1>
+<p>This is an <a href="https://github.com/innmind/ipc/">abstraction</a> on top of <a href="operating_system.html"><code>operating-system</code></a> to help communicate over a socket between PHP processes.</p>
+<p>The communication protocol has been inspired from the <a href="https://github.com/innmind/amqp/">amqp</a> one so it incorporates message acknowledgements and heartbeats.</p>
+<p>Usage of this package can be found in the <a href="../tools/silent_cartographer.html">Silent cartographer</a> or <a href="../tools/kalmiya.html">Kalmiya</a> to communicate between the <a href="https://github.com/Innmind/Kalmiya/blob/develop/src/Command/Music/Authenticate.php#L63">CLI</a> and an <a href="https://github.com/Innmind/Kalmiya/blob/develop/src/RequestHandler/AppleMusic.php#L90">HTTP server</a> for the login process to <a href="https://github.com/musiccompanion/AppleMusic/">Apple Music</a>.</p></main>
+    <footer>
+        <a href="https://github.com/innmind/documentation/" target="_blank">GitHub</a>
+    </footer>
+</body>
+</html>
