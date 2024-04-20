@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Monaspace Neon";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/MonaspaceNeon-Regular.woff");
+}
+
+:root {
+  --md-code-font: "Monaspace Neon";
+}
