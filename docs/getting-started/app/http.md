@@ -1,7 +1,5 @@
-# Queues
+# HTTP
 
 ## Installation
 
 ## Usage
-
-## Tips

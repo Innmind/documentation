@@ -1,7 +1,5 @@
-# Queues
+# CLI
 
 ## Installation
 
 ## Usage
-
-## Tips
