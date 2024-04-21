@@ -8,3 +8,21 @@
 :root {
   --md-code-font: "Monaspace Neon";
 }
+
+:root .language-php > * {
+  --md-code-hl-number-color: #f78c6c;
+  --md-code-hl-function-color: #82aaff;
+  --md-code-hl-operator-color: #89ddff;
+  --md-code-hl-constant-color: #c792ea;
+  --md-code-hl-string-color: #c3e88d;
+  --md-code-hl-punctuation-color: #89ddff;
+  --md-code-hl-keyword-color: #c792ea;
+  --md-code-hl-variable-color: #e8f9f9;
+  --md-code-hl-comment-color: #546e7a;
+  --md-code-bg-color: #263238;
+  --md-code-fg-color: #ffcb6b;
+}
+
+.language-php .na {
+  --md-code-hl-variable-color: #82aaff;
+}
