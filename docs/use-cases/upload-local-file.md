@@ -1,7 +1,6 @@
 # Upload a local file via HTTP
 
 ```php
-use Innmind\OperatingSystem\Factory;
 use Innmind\Filesystem\Name;
 use Innmind\Http\{
     Message\Request\Request,
@@ -17,8 +16,6 @@ use Innmind\Url\{
     Path,
 };
 
-$os = Factory::build();
-
 $boundary = Boundary::uuid();
 $_ = $os
     ->filesystem()
@@ -27,12 +24,14 @@ $_ = $os
     ->flatMap(
         static fn($file) => $os
             ->remote()
-            ->http()(new Request(
+            ->http()(Request::of(
                 Url::of('https://some-server.com/api/upload'),
                 Method::post,
                 ProtocolVersion::v11,
                 Headers::of(ContentType::of('multipart', 'form-data', $boundary)),
-                Multipart::boundary($boundary)->withFile('some[file]', $file),
+                Multipart::boundary($boundary)
+                    ->withFile('some[file]', $file)
+                    ->asContent(),
             ))
             ->maybe(),
     )
@@ -41,5 +40,3 @@ $_ = $os
         static fn() => throw new \Exception('No file or failed to upload'),
     );
 ```
-
-> **Note** This example requires [`innmind/operating-system`](https://packagist.org/packages/innmind/operating-system).

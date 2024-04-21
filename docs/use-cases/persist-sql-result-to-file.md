@@ -1,11 +1,10 @@
 # Persist a SQL result to a file
 
 ```php
-use Innmind\OperatingSystem\Factory;
-use Innmind\Filesystem\File\{
+use Innmind\Filesystem\{
     File,
-    Content\Lines,
-    Content\Line,
+    File\Content,
+    File\Content\Line,
 };
 use Innmind\Url\{
     Url,
@@ -17,8 +16,6 @@ use Formal\AccessLayer\{
     Table\Name,
 };
 
-$os = Factory::build();
-
 $sql = $os
     ->remote()
     ->sql(Url::of('mysql://127.0.0.1:3306/database_name'));
@@ -28,7 +25,7 @@ $_ = $os
     ->mount(Path::of('some directory/'))
     ->add(File::named(
         'results.csv',
-        Lines::of(
+        Content::ofLines(
             $sql(Select::onDemand(Name::of('table_name')))
                 ->map(
                     static fn($row) => $row
@@ -42,5 +39,3 @@ $_ = $os
 ```
 
 Since the sql query is lazy (thanks to `::onDemand()`) you can persist a very long result without loading everything in memory.
-
-> **Note** This example requires [`innmind/operating-system`](https://packagist.org/packages/innmind/operating-system).

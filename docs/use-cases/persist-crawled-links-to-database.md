@@ -1,10 +1,13 @@
 # Persist crawled links to a database
 
+```sh
+composer require innmind/html:~6.3
+```
+
 ```php
-use Innmind\OperatingSystem\Factory;
 use Innmind\Http\{
-    Message\Request\Request,
-    Message\Method,
+    Request,
+    Method,
     ProtocolVersion,
 };
 use Innmind\Html\{
@@ -20,15 +23,14 @@ use Formal\AccessLayer\{
     Row,
 };
 
-$os = Factory::build();
-$reader = Reader::default();
+$read = Reader::default();
 $sql = $os
     ->remote()
     ->sql(Url::of('mysql://127.0.0.1:3306/database_name'));
 
 $_ = $os
     ->remote()
-    ->http()(new Request(
+    ->http()(Request::of(
         Url::of('https://some-server.com/page.html')
         Method::get,
         ProtocolVersion::v11,
@@ -46,5 +48,3 @@ $_ = $os
         Row::of(['column_name' => $href]),
     )));
 ```
-
-> **Note** This example requires [`innmind/operating-system`](https://packagist.org/packages/innmind/operating-system) and [`innmind/html`](https://packagist.org/packages/innmind/html).

@@ -1,14 +1,15 @@
 # Copy a local directory to S3
 
+```sh
+composer require innmind/s3:~4.1
+```
+
 ```php
-use Innmind\OperatingSystem\Factory;
 use Innmind\S3;
 use Innmind\Url\{
     Url,
     Path,
 };
-
-$os = Factory::build();
 
 $bucket = S3\Factory::of($os)->build(
     Url::of('https://acces_key:acces_secret@bucket-name.s3.region-name.scw.cloud/'),
@@ -22,5 +23,3 @@ $directory = $os
     ->root();
 $s3->add($directory);
 ```
-
-> **Note** This example requires [`innmind/operating-system`](https://packagist.org/packages/innmind/operating-system) and [`innmind/s3`](https://packagist.org/packages/innmind/s3).

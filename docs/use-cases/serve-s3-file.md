@@ -1,5 +1,9 @@
 # Serve a S3 file via an HTTP server
 
+```sh
+composer require innmind/s3:~4.1
+```
+
 ```php
 use Innmind\Framework\{
     Application,
@@ -12,9 +16,9 @@ use Innmind\Filesystem\{
     Name,
 };
 use Innmind\Http\{
-    Message\ServerRequest,
-    Message\Response\Response,
-    Message\StatusCode,
+    ServerRequest,
+    Response,
+    Response\StatusCode,
     Headers,
     Header\ContentType,
 };
@@ -39,7 +43,7 @@ new class extends Http {
                         ->s3
                         ->get(Name::of('some file.txt'))
                         ->match(
-                            static fn($file) => new Response(
+                            static fn($file) => Response::of(
                                 StatusCode::ok,
                                 $request->protocolVersion(),
                                 Headers::of(ContentType::of(
@@ -60,4 +64,5 @@ new class extends Http {
 };
 ```
 
-> **Note** This example requires [`innmind/framework`](https://packagist.org/packages/innmind/framework) and [`innmind/s3`](https://packagist.org/packages/innmind/s3).
+!!! tip
+    Head to the [framework section](../getting-started/framework/index.md) to learn how to call this server.
