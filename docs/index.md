@@ -12,6 +12,8 @@ This documentation will show you how to move from simple scripts all the way to 
 
 By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) section is an important part you can skip to the [Getting started](getting-started/index.md) section if you want to feel what it's like to code with Innmind.
 
+If you've seen modern Java, C#, Rust, Swift and co you should find the Innmind code very familiar.
+
 ??? example "Sneak peek"
     The code below shows how the declarative nature of Innmind abstracts away the complexity.
 
