@@ -30,7 +30,7 @@ Innmind heavily leans toward simplicity. Even if at times it doesn't feel easy.
 
 ## In practice
 
-The [Filesystem package](../getting-started/filesystem/index.md) was bit (in an early version) for mistaking easyness by simplicity.
+The [Filesystem package](../getting-started/operating-system/filesystem.md) was bit (in an early version) for mistaking easyness by simplicity.
 
 The `Adapter` interface has a `get` method to return a file. Initially the argument passed to it was a `string` to represent the file name. But months later when building an [S3](https://github.com/Innmind/S3) abstraction for this interface it wasn't clear if a path could be passed in the string.
 
