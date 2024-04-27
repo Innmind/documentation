@@ -125,6 +125,8 @@ markdown_extensions:
             startinline: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - attr_list
+  - md_in_html
   - pymdownx.superfences
   - abbr
   - admonition
