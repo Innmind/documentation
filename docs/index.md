@@ -10,9 +10,7 @@ Innmind bridges Object Oriented Programming and Functional Programming in a cohe
 
 This documentation will show you how to move from simple scripts all the way to distributed systems (and all the steps in-between) by using a single way to code.
 
-By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) section is an important part you can skip to the [Getting started](getting-started/index.md) section if you want to feel what it's like to code with Innmind.
-
-If you've seen modern Java, C#, Rust, Swift and co you should find the Innmind code very familiar.
+If you've seen modern Java, C#, Rust, Swift and co you should find Innmind very familiar.
 
 ??? example "Sneak peek"
     The code below shows how the declarative nature of Innmind abstracts away the complexity.
@@ -54,3 +52,5 @@ If you've seen modern Java, C#, Rust, Swift and co you should find the Innmind c
     ```
 
     This example sends an HTTP response of a `.tar.gz` containing all files contained in a `avatars` directory and with a CSV of all users stored in a database. All this is done with the guarantee that you won't run in "out of memory" errors, and other advantages you'll learn throughout this documentation.
+
+By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) section is an important part you can skip to the [Getting started](getting-started/index.md) section if you want to feel what it's like to code with Innmind.
