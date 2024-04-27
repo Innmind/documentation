@@ -4,28 +4,51 @@ hide:
     - toc
 ---
 
-# Welcome to MkDocs
+# Welcome to Innmind
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Innmind bridges Object Oriented Programming and Functional Programming in a coherent ecosystem.
 
-## Commands
+This documentation will show you how to move from simple scripts all the way to distributed systems (and all the steps in-between) by using a single way to code.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) section is an important part you can skip to the [Getting started](getting-started/index.md) section if you want to feel what it's like to code with Innmind.
 
-## Project layout
+??? example "Sneak peek"
+    The code below shows how the declarative nature of Innmind abstracts away the complexity.
 
-```php
-<?php
-/**
- * @template T
- * @param T $t
- * @return list<T>
- */
-function t(mixed $t): mixed
-{
-    return [$t];
-}
-```
+    ```php
+    $os
+        ->filesystem()
+        ->mount(Path::of('somewhere/data/'))
+        ->get(Name::of('avatars'))
+        ->keep(Instance::of(Directory::class))
+        ->map(
+            static fn($directory) => $directory->add(File::named(
+                'users.csv',
+                Content::ofLines(
+                    $orm
+                        ->repository(User::class)
+                        ->all()
+                        ->map(static fn(User $user) => $user->toArray())
+                        ->map(static fn(array $user) => \implode(',', $user))
+                        ->map(Str::of(...))
+                        ->map(Line::of(...)),
+                ),
+            )),
+        )
+        ->map(Tar::encode($os->clock()))
+        ->map(Gzip::encode())
+        ->match(
+            static fn(File $tar) => Response::of(
+                StatusCode::ok,
+                ProtocolVersion::v11,
+                null,
+                $tar->content(),
+            ),
+            static fn() => Response::of(
+                StatusCode::noContent,
+                ProtocolVersion::v11,
+            ),
+        );
+    ```
+
+    This example sends an HTTP response of a `.tar.gz` containing all files contained in a `avatars` directory and with a CSV of all users stored in a database. All this is done with the guarantee that you won't run in "out of memory" errors, and other advantages you'll learn throughout this documentation.
