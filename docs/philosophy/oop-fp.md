@@ -128,7 +128,7 @@ While this example may not seem to provide much value, these structures are extr
 
 ## False dichotomy
 
-When choosing our tools we are usually presented 2 choices: Hype vs Boring technologies, OOP vs FP, etc... with the impression that we can only chose one.
+When choosing our tools we are usually presented 2 choices: Hype vs Boring technologies, OOP vs FP, etc... with the impression that we can only choose one.
 
 Innmind uses both OOP and FP to take advantages from both worlds.
 
