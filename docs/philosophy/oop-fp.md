@@ -60,10 +60,12 @@ An example is an HTTP client (1) that provides a base implementation to do call 
 
 1. such as [`innmind/http-transport`](https://github.com/Innmind/HttpTransport)
 
+<div markdown>
 - `logger(followRedirections(curl))` will only log the user calls and is unaware if the redirections are foolowed
 - `followRedirections(logger(curl))` will log the user calls and every redirections
 - `circuitBreaker(logger(curl))` will not log calls to a domain that has previously failed
 - etc...
+</div>
 
 The big advantage is that you can compose them _locally_ depending on your needs (1).
 {.annotate}
