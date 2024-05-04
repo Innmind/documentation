@@ -77,6 +77,7 @@ theme:
   font: false
   features:
     - content.code.copy
+    - content.code.annotate
     - navigation.tracking
     - navigation.tabs
     - navigation.tabs.sticky
