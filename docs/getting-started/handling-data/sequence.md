@@ -1,6 +1,6 @@
 # Sequence
 
-A `Sequence` represent a succession of values. In plain old PHP this is an array where you don't specify any key.
+A `Sequence` monad represents a succession of values. In plain old PHP this is an array where you don't specify any key.
 
 In essence:
 ```php
