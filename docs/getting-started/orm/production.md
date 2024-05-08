@@ -113,6 +113,8 @@ $_ = $createIndex(User::class)->match(
 );
 ```
 
+1. Don't forget to also declare your own types here.
+
 ## Filesystem
 
 ### Local
