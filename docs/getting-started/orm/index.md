@@ -42,7 +42,7 @@ $_ = $manager
 Since it focuses on usage and not _abstracting a persistence model_ this ORM allows 3 different persistence models:
 
 - SQL
-- Filesystem (real one or in memory)
+- Filesystem
 - Elasticsearch
 
 *[ORM]: Object Relational Mapping
