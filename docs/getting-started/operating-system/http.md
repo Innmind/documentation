@@ -72,7 +72,7 @@ $request = Request::of(
     Headers::of(
         ContentType::of('application', 'json'),
     ),
-    Content::ofString(Json::encode(['some' => 'payload'])), # (1)
+    Content::ofString(Json::encode(['some' => 'payload'])), #(1)
 );
 ```
 

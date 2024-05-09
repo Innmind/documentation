@@ -53,7 +53,7 @@ The `SQL` class allows you to specify the exact query you want to execute. But i
         Table\Column,
     };
 
-    $select = Select::from(Name::of('users'))->columns( # (1)
+    $select = Select::from(Name::of('users'))->columns( #(1)
         Column\Name::of('id'),
         Column\Name::of('username'),
     );

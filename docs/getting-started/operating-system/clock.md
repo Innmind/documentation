@@ -47,7 +47,7 @@ When you receive a `string` (1) that represent a date and you want to convert it
 ```php
 $point = $os
     ->clock()
-    ->at($string, new ISO8601) # (1)
+    ->at($string, new ISO8601) #(1)
     ->match(
         static fn(PointInTime $point) => $point,
         static fn() => throw new \RuntimeException("'$string' is not a valid date"),

@@ -126,7 +126,7 @@ This becomes even more flagrant if the method that returns the brother id itself
 === "Innmind"
     ```php hl_lines="2"
     getUser(42)
-        ->flatMap(static fn(User $user) => $user->getBrotherId()) # (1)
+        ->flatMap(static fn(User $user) => $user->getBrotherId()) #(1)
         ->flatMap(static fn(int $id) => getUser($id))
         ->match(
             static fn(User $brother) => doStuff($brother),

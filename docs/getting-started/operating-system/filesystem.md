@@ -34,7 +34,7 @@ use Innmind\Immutable\Predicate\Instance;
 
 $os
     ->filesystem()
-    ->mount(Path::of('some directory/')) # (1)
+    ->mount(Path::of('some directory/')) #(1)
     ->get(Name::of('some-file.txt'))
     ->keep(Instance::of(File::class))
     ->match(
@@ -52,7 +52,7 @@ use Innmind\Filesystem\Directory;
 
 $os
     ->filesystem()
-    ->mount(Path::of('some directory/')) # (1)
+    ->mount(Path::of('some directory/')) #(1)
     ->get(Name::of('sub folder'))
     ->keep(Instance::of(Directory::class))
     ->flatMap(static fn(Directory $directory) => $directory->get(

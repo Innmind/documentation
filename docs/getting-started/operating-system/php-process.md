@@ -55,7 +55,7 @@ $os
     ->get(Name::of('users.csv'))
     ->keep(Instance::of(File::class))
     ->map(static fn(File $file) => $file->content()->lines())
-    ->toSequence() # (1)
+    ->toSequence() #(1)
     ->flatMap(static fn(Sequence $lines) => $lines)
     ->takeWhile(static function() use (&$signaled) {
         return !$signaled;
