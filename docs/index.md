@@ -53,4 +53,4 @@ If you've seen modern Java, C#, Rust, Swift and co you should find Innmind very 
 
     This example sends an HTTP response of a `.tar.gz` containing all files contained in a `avatars` directory and with a CSV of all users stored in a database. All this is done with the guarantee that you won't run in "out of memory" errors, and other advantages you'll learn throughout this documentation.
 
-By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) section is an important part you can skip to the [Getting started](getting-started/index.md) section if you want to feel what it's like to code with Innmind.
+By following the links at the bottom of each page you'll progressively learn your way through Innmind. While the [Philosophy](philosophy/index.md) chapter is an important part you can skip to the [Getting started](getting-started/index.md) one if you want to feel what it's like to code with Innmind.

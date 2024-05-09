@@ -20,7 +20,7 @@ Changelogs and the type system will help you through all changes.
 
 > and make it hard to use it wrong.
 
-This summarizes all the previous sections.
+This summarizes all the previous chapters.
 
 To reach this all packages go through the same iteration loop:
 

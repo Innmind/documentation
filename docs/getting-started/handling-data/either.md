@@ -175,4 +175,4 @@ In all examples you've seen the use of `flatMap` but you can also use the `map` 
 
 But the beauty is that if you don't want to deal with the different errors you can throw them away by converting the `Either` to a `Maybe` via `$either->maybe()`.
 
-Like `Maybe` and `Sequence` is has a [deferred mode](sequence.md#deferred) that allows to postpone some actions as you'll see in the [concurrent HTTP calls section](../concurrency/http.md).
+Like `Maybe` and `Sequence` is has a [deferred mode](sequence.md#deferred) that allows to postpone some actions as you'll see in the [concurrent HTTP calls chapter](../concurrency/http.md).

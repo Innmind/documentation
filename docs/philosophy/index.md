@@ -10,6 +10,6 @@ This is why all the packages fits together to help solve bigger and bigger probl
 
 This also enforces 2 things. Abstractions need to be extremely robust to safely build higher abstractions. And they need to be reusable outside this project (to avoid being wasted in case the goal is not reachable).
 
-All the following sections will describe the principles behind the abstractions robustness.
+All the following chapters will describe the principles behind the abstractions robustness.
 
 [^1]: You can learn more in this [french article](https://github.com/Innmind/Research-N-Development/blob/master/Papers/Sur%20la%20conscience.md)

@@ -65,4 +65,4 @@ new class extends Http {
 ```
 
 !!! tip
-    Head to the [framework section](../getting-started/framework/index.md) to learn how to call this server.
+    Head to the [framework chapter](../getting-started/framework/index.md) to learn how to call this server.

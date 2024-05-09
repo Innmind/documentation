@@ -135,7 +135,7 @@ You can configure the max concurrency at the start of your program and leave you
     };
     ```
 
-    [Related section](../app/cli.md)
+    [Related chapter](../app/cli.md)
 
 === "HTTP app"
     ```php
@@ -158,7 +158,7 @@ You can configure the max concurrency at the start of your program and leave you
     };
     ```
 
-    [Related section](../app/http.md)
+    [Related chapter](../app/http.md)
 
 The examples here use a maximum of `20` but you should adapt it to the needs of your program.
 
@@ -168,4 +168,4 @@ When calling a `match` method it will wait for all planned request to finish bef
 
 This means that you can't react as soon as a response is accessible. Your program can still stay idle for some time.
 
-If you need better reaction timing you should head to the [asynchronous section](async.md).
+If you need better reaction timing you should head to the [asynchronous chapter](async.md).

@@ -82,7 +82,7 @@ Here we send some json must you can send anything you want.
 
 The body of a `Request`, and a `Response`, is expressed via the `Content` class from the filesystem abstraction. This means that it can contain any valid file content.
 
-You'll learn more on this `Content` in the [next section](filesystem.md).
+You'll learn more on this `Content` in the [next chapter](filesystem.md).
 
 ## Following redirections
 

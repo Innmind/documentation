@@ -20,7 +20,7 @@ $os = Factory::build();
 $os instanceof OperatingSystem; // returns true
 ```
 
-You'll see in the following sections all the ways you can use this object.
+You'll see in the following chapters all the ways you can use this object.
 
 !!! info ""
     From this point on everytime you see the variable `$os` it references this object.

@@ -76,7 +76,7 @@ You can now do `php bin/console greet John` to print `Hello John`.
     ```
 
     - `$container` is a service locator
-    - `$os` you've seen it in previous section
+    - `$os` you've seen it in the previous chapter
     - `$env` contains the environment variables
 
 You can add as many commands as uou wish by chaining calls to the `command` method.

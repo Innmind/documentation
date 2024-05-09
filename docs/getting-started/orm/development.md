@@ -2,9 +2,9 @@
 
 ## Setup
 
-For this section we'll work with a `User` class that can have multiple `Address` objects.
+For this chapter we'll work with a `User` class that can have multiple `Address` objects.
 
-To keep things simple we'll work with an in memory persistence. You'll learn how to really persist them in the [next section](production.md).
+To keep things simple we'll work with an in memory persistence. You'll learn how to really persist them in the [next chapter](production.md).
 
 ```php
 use Formal\ORM\Manager;
@@ -56,7 +56,7 @@ $orm = Manager::filesystem(InMemory::emulateFilesystem()); #(1)
     }
     ```
 
-    1. You'll learn more on why this annotation is required in the [production section](production.md)
+    1. You'll learn more on why this annotation is required in the [production chapter](production.md)
 
     A `User` is called an aggregate in this ORM. This is the root object that have ownership of every data inside it (more on that below).
 

@@ -106,7 +106,7 @@ new class extends Http {
     - `$request` is the parsed request sent by a user
     - `$variables` gathers all the values described by the route template
     - `$container` is a service locator
-    - `$os` you've seen it in previous section
+    - `$os` you've seen it in the previous chapter
     - `$env` contains the environment variables
 
 ## Composition

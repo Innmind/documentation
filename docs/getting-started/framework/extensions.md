@@ -4,7 +4,7 @@
 
 This framework comes with these middlewares:
 
-- `Innmind\Framework\Middleware\Optional` to load a middleware only if the class exist, as seen in the [profiler section](profiler.md)
+- `Innmind\Framework\Middleware\Optional` to load a middleware only if the class exist, as seen in the [profiler chapter](profiler.md)
 - `Innmind\Framework\Middleware\LoadDotEnv` to load a `.env` file and inject the values in the `Innmind\Framework\Environment` object
 
 ## Others

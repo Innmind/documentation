@@ -2,7 +2,7 @@
 
 ## Unix socket
 
-If you look to communicate between processes you should head to the [IPC section](../concurrency/ipc.md).
+If you look to communicate between processes you should head to the [IPC chapter](../concurrency/ipc.md).
 
 ### Server
 
