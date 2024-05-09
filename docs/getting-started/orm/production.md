@@ -115,6 +115,11 @@ $_ = $createIndex(User::class)->match(
 
 1. Don't forget to also declare your own types here.
 
+??? warning
+    Unlike other storages Elasticsearch doesn't support transactions.
+
+    Elasticsearch also doesn't allo to list more than 10k aggregates, this means that if you store more than that you won't be able to list them all in a single `Sequence`. You'll need to use explicit search queries to find them all back.
+
 ## Filesystem
 
 ### Local
