@@ -15,7 +15,7 @@ $os
 You can use any unit of period except months because it's not a absolute value.
 
 ??? info
-    If you want to wait for years it will compute that as `365` days. But if you need to do this there may be a design problem in your app.
+    If you want to wait for years it will compute that as `365` days. But if you need to do this there may be a design problem in your program.
 
 ## Handling CLI Signals
 
@@ -24,7 +24,7 @@ Any process can receive signals to tell them a user (or the system) wants to shu
 
 1. This is the prevalent usage, but [there are more](https://en.wikipedia.org/wiki/Signal_(IPC)).
 
-For example let's you need to import a large csv file into a database but you want to be able to stop it gracefully. You can do:
+For example let's say you need to import a large csv file into a database but you want to be able to stop it gracefully. You can do:
 
 ```php hl_lines="13 15 18-21 31-33"
 use Innmind\Signals\Signal;

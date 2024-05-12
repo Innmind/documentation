@@ -6,7 +6,7 @@ If you look to communicate between processes you should head to the [IPC chapter
 
 ### Server
 
-The first part to build a socket server is to accept incoming connections at an ardress:
+The first part to build a socket server is to accept incoming connections at an address:
 
 ```php
 use Innmind\IO\Sockets\Server;

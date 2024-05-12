@@ -52,7 +52,7 @@ use Innmind\Filesystem\Directory;
 
 $os
     ->filesystem()
-    ->mount(Path::of('some directory/')) #(1)
+    ->mount(Path::of('some directory/'))
     ->get(Name::of('sub folder'))
     ->keep(Instance::of(Directory::class))
     ->flatMap(static fn(Directory $directory) => $directory->get(
@@ -67,7 +67,7 @@ $os
 ??? note
     You can use any level of directory nesting, as long as it's supported by your machine's filesystem.
 
-If you wan to access all the files at the root of the adapter you can do:
+If you want to access all the files at the root of the adapter you can do:
 
 ```php
 $files = $os
@@ -206,7 +206,7 @@ You can use `Content::map()` to change each line of a file. `Content::flatMap()`
 
 ## Watching for changes
 
-Let's say you have a directory and you want to execute some code every time some adds a file to it. You can do this:
+Let's say you have a directory and you want to execute some code every time someone adds a file to it. You can do this:
 
 ```php
 use Innmind\FileWatch\Continuation;
@@ -230,7 +230,7 @@ $result = $watch(
 Here you'll react to `42` modifications of the directory `some directory/` and then assign `42` to `$result`. In essence this acts as a _reduce_ operation that could be infinite.
 
 !!! note ""
-    `0` and `int $count` are a carried value between each call of the function. Here it's an `int` but you can use any type you wish.
+    `0` and `int $count` are a carried value between each call of the function. Here it's an `int` but you can use any type you want.
 
 ??? warning
     You should **not** use this method in production as it executes a `stat` command every second.

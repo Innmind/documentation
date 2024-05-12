@@ -12,7 +12,7 @@ composer require innmind/mantle:~2.1
 
 Mantle works a bit like a reduce operation. The _reducer_ function allows to launch `Task`s and react to their results. Both the _reducer_ and tasks are run asynchronously.
 
-=== "Reducer"
+=== "Script"
     ```php
     use Innmind\Mantle\Forerunner;
     use Innmind\Http\Response;
@@ -29,7 +29,7 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
 === "Carried value"
     Like in a real reduce operation you need a carried value that will be passed to the reducer every time it's called.
 
-    Here we use a `Carried` class but you can use any type you wish.
+    Here we use a `Carried` class but you can use any type you want.
 
     ```php
     use Innmind\Http\Response;
@@ -183,7 +183,7 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
 
 ## Advantages
 
-The first big advantage of this design is that your task is completely unaware that it is run asynchronously. It all depends on the `$os` variable inject (1). This means that you can easily experiment a piece of your program in an async context by what code calls it, your program logic itself doesn't have to change!
+The first big advantage of this design is that your task is completely unaware that it is run asynchronously. It all depends on the `$os` variable injected (1). This means that you can easily experiment a piece of your program in an async context by what code calls it, your program logic itself doesn't have to change!
 {.annotate}
 
 1. If it comes from Mantle it's async otherwise it's sync.
@@ -202,4 +202,4 @@ The other advantage is that since all state is local you can compose async code 
 Most of these limitations are planned to be fixed in the future.
 
 !!! warning ""
-    You may not want to use this in production just yet, or at least for mission critical code.
+    You may not want to use this in production just yet, or at least not for mission critical code.

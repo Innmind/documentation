@@ -23,7 +23,7 @@ $os instanceof OperatingSystem; // returns true
 You'll see in the following chapters all the ways you can use this object.
 
 !!! info ""
-    From this point on everytime you see the variable `$os` it references this object.
+    From this point on everytime you see the variable `$os` it refers to this object.
 
 ??? warning
     This package is not compatible with Windows.
@@ -42,8 +42,7 @@ $os = Factory::build(
 );
 ```
 
-Here we tell the abstraction that we work on a case insensitive filesystem (1) and that the HTTP client should not check the SSL certificates (2). But this class allows more configuration, you should take a look at all its methods.
+Here we tell the abstraction that we work on a case insensitive filesystem and that the HTTP client should not check the SSL certificates (1). But this class allows more configuration, you should take a look at all its methods.
 {.annotate}
 
-1. [More on that later](filesystem.md).
-2. You should do this only when working locally. Do NOT do this in production.
+1. You should do this only when working locally. Do **NOT** do this in production.

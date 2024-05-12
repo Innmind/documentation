@@ -9,6 +9,6 @@ This helps bring higher and higher stable abstractions without the burden to wri
 
 [`innmind/black-box`](blackbox.md) can help you bring this technique to your projects. You can start writing tests like you're used to and gradually move toward PBT.
 
-Innmind packages started initially where tested with PHPUnit and gradually move to BlackBox.
+Innmind packages initially were tested with PHPUnit and now gradually move to BlackBox.
 
 *[PBT]: Property Based Testing

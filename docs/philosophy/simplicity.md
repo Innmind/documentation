@@ -4,12 +4,12 @@
 
 We tend to use simple and easy or difficult and complex interchangeably. But they're very much different.
 
-Complexity is a objective scale (1) of a number of parts of a system and the number of interactions between each parts.
+Complexity is an objective scale (1) of a number of parts of a system and the number of interactions between each part.
 {.annotate}
 
 1. with Simplicity being on one end of this scale
 
-Difficulty is a subjective scale related to your familiarity with a subject. By familiarity ear the number of time you've done some task.
+Difficulty is a subjective scale related to your familiarity with a subject. By familiarity ear the number of times you've done some task.
 
 A general example of this difference is an electric circuit to light a bulb:
 
@@ -30,7 +30,7 @@ Innmind heavily leans toward simplicity. Even if at times it doesn't feel easy.
 
 ## In practice
 
-The [Filesystem package](../getting-started/operating-system/filesystem.md) was bit (in an early version) for mistaking easyness by simplicity.
+The [Filesystem package](../getting-started/operating-system/filesystem.md) was bitten (in an early version) for mistaking easyness by simplicity.
 
 The `Adapter` interface has a `get` method to return a file. Initially the argument passed to it was a `string` to represent the file name. But months later when building an [S3](https://github.com/Innmind/S3) abstraction for this interface it wasn't clear if a path could be passed in the string.
 

@@ -9,7 +9,7 @@ A map's aim is to shrink the information to the minimum for us to accomplish our
 
 Abstractions are the same.
 
-An abstraction that tries to represent all the informations it tries to abstract fails in its mission. In the end you end up with the same information but expressed in a different way.
+An abstraction that tries to represent all the information it tries to abstract fails in its mission. In the end you end up with the same information but expressed in a different way.
 
 This means that for an abstraction to be useful it **must** omit information.
 

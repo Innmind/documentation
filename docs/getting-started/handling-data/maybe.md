@@ -217,6 +217,6 @@ So far we _do nothing_ in case our user doesn't have a brother. But what if we w
 {.annotate}
 
 1. Such as the absence of a [file on the filesystem](../operating-system/filesystem.md) or the absence of an [entity from a storage](../orm/index.md).
-2. Such as failing to [upload a file to an S3 bucket](https://github.com/Innmind/S3)
+2. Such as failing to [upload a file to an S3 bucket](https://github.com/Innmind/S3).
 
-It also as a [deferred mode like `Sequence`](sequence.md#deferred) that allows to not directly load in memory a value when you call `$sequence->get($index)`. The returned `Maybe` in this case will load the value when you call the `match` method.
+It also has a [deferred mode like `Sequence`](sequence.md#deferred) that allows to not directly load in memory a value when you call `$sequence->get($index)`. The returned `Maybe` in this case will load the value when you call the `match` method.

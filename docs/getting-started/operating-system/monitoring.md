@@ -2,9 +2,11 @@
 
 ## Processes
 
-You can access information on all processes actually running on the machine via:
+You can access information on all processes currently running on the machine via:
 
 ```php
+use Innmind\Server\Status\Server\Process;
+
 $os
     ->status()
     ->processes()
@@ -44,6 +46,8 @@ $updatedProcess = $os
 You can access all the mounted volumes via:
 
 ```php
+use Innmind\Server\Status\Server\Disk\Volume;
+
 $os
     ->status()
     ->disk()

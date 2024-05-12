@@ -2,13 +2,13 @@
 
 ## Type strictness
 
-All packages uses [Psalm](https://psalm.dev) on the strictess level to make sure there won't be type errors.
+All packages use [Psalm](https://psalm.dev) on the strictess level to make sure there won't be type errors.
 
 To make sure you use Innmind correctly you should use it as well.
 
 ## Versioning
 
-All packages uses [Semver](https://semver.org) to release new versions.
+All packages use [Semver](https://semver.org) to release new versions.
 
 All minor and bugfix versions are retro compatible and try as mush as possible to not change your program's behaviour. Most updates bring new code that you have to choose to use it (or not).
 
@@ -18,7 +18,7 @@ Changelogs and the type system will help you through all changes.
 
 ## Make it easy to use it right
 
-> and make it hard to use it wrong.
+> and make it difficult to use it wrong.
 
 This summarizes all the previous chapters.
 

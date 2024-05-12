@@ -15,10 +15,10 @@ $os
     ->get(Name::of('file'))
     ->keep(Instance::of(File::class))
     ->match(
-        static fn($file) => $file
+        static fn(File $file) => $file
             ->content()
             ->lines()
-            ->forech(static fn($line) => echo $line->toString()),
+            ->foreach(static fn(Line $line) => echo $line->toString()),
         static fn() => echo 'unknown file',
     );
 ```

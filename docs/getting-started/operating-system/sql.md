@@ -101,6 +101,12 @@ When selecting from a table you can restrict the rows by specifying them manuall
 For example let's say you want to retrieve all users whose username starts with `a`. The first step is to create a specification:
 
 ```php
+use Innmind\Specification\{
+    Comparator,
+    Composable,
+    Sign,
+};
+
 /** @psalm-immutable */
 final class Username implements Comparator
 {
@@ -121,7 +127,7 @@ final class Username implements Comparator
 
     public function property(): string
     {
-        return 'username';
+        return 'username'; #(1)
     }
 
     public function sign(): Sign
@@ -136,6 +142,8 @@ final class Username implements Comparator
 }
 ```
 
+1. This is the column name.
+
 And then you use it like this:
 
 ```php
@@ -146,7 +154,7 @@ $sql($select);
 ```
 
 !!! success ""
-    The big advantage of specifications is that you can easily compose them. For example if you want users starting with `a` or `b` you'd do `#!php Username::startsWith('a')->or(Username::startsWith('b'))`; and if you all execpt these ones you can chain a `->not()` to negate the whole condition.
+    The big advantage of specifications is that you can easily compose them. For example if you want users starting with `a` or `b` you'd do `#!php Username::startsWith('a')->or(Username::startsWith('b'))`; and if you want all except these ones you can chain a `->not()` to negate the whole condition.
 
     Another advantage is that this composition forces you to think about precedence of your conditions to reduce the risk of implicit behaviours.
 
@@ -169,7 +177,7 @@ $sql($select)->foreach(
 With this even if the result contains a million rows there'll only be one at a time in memory.
 
 ??? info
-    However this means that if you call `foreach` twice it will run the query twice. The returned rows may change between the 2 calls, if you need the results to be the same you can use lazy queries!
+    However this means that if you call `foreach` twice it will run the query twice. The returned rows may change between the 2 calls, if you need the results to be the same you can't use lazy queries!
 
 ## Transactions
 

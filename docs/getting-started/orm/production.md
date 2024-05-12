@@ -12,7 +12,7 @@ As said in the introduction you have 3 options:
 
 If you need a reliable storage you should use SQL as it's battle proven.
 
-If your're trying to build a proof of concept then it's probable not necessary to use any third party storage and go with the filesystem.
+If you're trying to build a proof of concept then it's probable not necessary to use any third party storage and go with the filesystem.
 
 If you need efficiency when searching for your aggregates then you should go with Elasticsearch.
 
@@ -118,7 +118,7 @@ $_ = $createIndex(User::class)->match(
 ??? warning
     Unlike other storages Elasticsearch doesn't support transactions.
 
-    Elasticsearch also doesn't allo to list more than 10k aggregates, this means that if you store more than that you won't be able to list them all in a single `Sequence`. You'll need to use explicit search queries to find them all back.
+    Elasticsearch also doesn't allow to list more than 10k aggregates, this means that if you store more than that you won't be able to list them all in a single `Sequence`. You'll need to use explicit search queries to find them all back.
 
 ## Filesystem
 

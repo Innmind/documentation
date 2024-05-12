@@ -42,8 +42,8 @@ $_ = $os
     ->toSet()
     ->flatMap(Elements::of('a'))
     ->keep(Instance::of(A::class))
-    ->map(static fn($a) => $a->href()->toString())
-    ->foreach(static fn($href) => $sql(Insert::into(
+    ->map(static fn(A $a) => $a->href()->toString())
+    ->foreach(static fn(string $href) => $sql(Insert::into(
         Name::of('table_name'),
         Row::of(['column_name' => $href]),
     )));

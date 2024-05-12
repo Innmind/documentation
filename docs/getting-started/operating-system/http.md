@@ -1,6 +1,6 @@
 # HTTP
 
-This HTTP client uses the immutable object describing the protocol from the [`innmind/http` package](https://github.com/Innmind/Http).
+This HTTP client uses the immutable objects describing the protocol from the [`innmind/http` package](https://github.com/Innmind/Http).
 
 ## Usage
 
@@ -78,7 +78,7 @@ $request = Request::of(
 
 1. see [`innmind/json`](../../packages.md#json)
 
-Here we send some json must you can send anything you want.
+Here we send some json but you can send anything you want.
 
 The body of a `Request`, and a `Response`, is expressed via the `Content` class from the filesystem abstraction. This means that it can contain any valid file content.
 
@@ -107,7 +107,7 @@ We tend to think networks are always stable or services as always up, but at som
 
 If you need to call a service a lot but at some point becomes unavailable (for maintenance for example), you don't want to continue to try to call this service for a certain amount of time.
 
-The [circuit breaker](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern) is a pattern that will automatically return an error response (without doin the actual call) if the service failed in the previous `x` amount of time.
+The [circuit breaker](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern) is a pattern that will automatically return an error response (without doing the actual call) if the service failed in the previous `x` amount of time.
 
 You apply this pattern via this decorator:
 
@@ -190,4 +190,4 @@ $http(Request::of(
 The default client uses `cURL` under the hood and the way it is structured prevents the streaming of requests/responses.
 
 ??? info
-    However the work of the [distributed abstraction](../concurrency/distributed.md) will require the default client to switch to implementation based on sockets that will open the door to streaming.
+    However the work of the [distributed abstraction](../concurrency/distributed.md) will require the default client to switch to an implementation based on sockets that will open the door to streaming.

@@ -62,7 +62,7 @@ The `at` method returns the `Maybe<PointInTime>` type to make sure you always ha
 
 We need to calculate elapsed time, among other cases, when handling heartbeats when dealing with sockets or in tests to make sure some code is executed in a certain amount of time.
 
-The usual approach is to use a call to `microtime()` at the start and an another at the end and subtract them. The problem with this approach is that you can end up with a negative duration. This happens when your machine re-synchronise its clock via the [NTP protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol) and sometimes it can go back in time (1).
+The usual approach is to use a call to `microtime()` at the start and an another at the end and subtract them. The problem with this approach is that you can end up with a negative durations. This happens when your machine re-synchronise its clock via the [NTP protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol) and sometimes it can go back in time (1).
 {.annotate}
 
 1. To avoid this problem the solution is to use a monotonic clock (via the `hrtime()` PHP function).

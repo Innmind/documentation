@@ -14,11 +14,11 @@ The _bigger idea_ of OOP mentioned by [Alan Kay](https://en.wikipedia.org/wiki/A
 
 This is a more mathematical approach to building programs that has gained a lot of traction for the past few years.
 
-Innmind mainly use the principle described below, but FP as a whole has a lot more.
+Innmind mainly use the principles described below, but FP as a whole has a lot more.
 
 ### Immutability
 
-You already use immutable data without even realising it. For example if you do `$result = str_replace($search, $replace, $subject)`, the call of the function doesn't modify the values inside `$search`, `$replace` or `$subject` but returns a new value `$result`. This is in essence immutability, you only return new values.
+You already use immutable data without even realising it. For example if you do `#!php $result = str_replace($search, $replace, $subject)`, the call of the function doesn't modify the values inside `$search`, `$replace` or `$subject` but returns a new value `$result`. This is in essence immutability, you only return new values.
 
 This allows to have less things to think about when calling a method. You know for sure the data you pass in to a function won't change. And inside a function you know that manipulating the data passed in won't have side effects outside of your scope.
 
@@ -30,7 +30,7 @@ Innmind uses immutable data everywhere possible.
 
 This concept applies to functions; may it be anonymous functions, named functions or methods.
 
-A function is considered pure if it has no side effects. A side effect may be altering state or doing I/O. This means that a function can't use a global variable, print something to the screen or read something on the filesystem.
+A function is considered pure if it has no side effects. A side effect may be altering state or doing I/O. This means that a function can't use a global variable, print something to the screen or read something from the filesystem.
 
 In other words a pure function only interacts with the immutable arguments passed in and returns an immutable value.
 
@@ -38,7 +38,7 @@ Just like Immutability this allows to have less things to think about. By modify
 
 ### Totality
 
-A function is considered _total_ if it can return value for any combination of arguments it accepts.
+A function is considered _total_ if it can return a value for any combination of arguments it accepts.
 
 For example the function `divide(int, int): float` is not total because it will have to throw an exception for a division by `0`. On the other hand `divide(int, int): ?float` is total because it can return `null` in case of a division by `0`.
 
@@ -47,7 +47,7 @@ The advantage of using total functions is that a [static analysis tool](developm
 Innmind heavily relies on this design to reduce the mental load of making sure every unhappy path is covered.
 
 ??? info "Exceptions"
-    Innmind also relies on good old `Exception`s for cases where the program can't be recovered. But since it can't be recovered you don't have to think about them, that's also why they're not documented.
+    Innmind also relies on `Exception`s for cases where the program can't be recovered. But since it can't be recovered you don't have to think about them, that's also why they're not documented.
 
     It somewhat follows the `Let it crash` approach of [Erlang](https://www.erlang.org).
 
@@ -55,13 +55,13 @@ Innmind heavily relies on this design to reduce the mental load of making sure e
 
 This allows to extend the behaviour of a function without knowing its implementation. And this is completely transparent for the caller of such functions.
 
-An example is an HTTP client (1) that provides a base implementation to do call via `curl` and the `logger`, `followRedirections` and `circuitBreaker` decorators. You can compose them any way you wish:
+An example is an HTTP client (1) that provides a base implementation to do calls via `curl` and the `logger`, `followRedirections` and `circuitBreaker` decorators. You can compose them any way you wish:
 {.annotate}
 
 1. such as [`innmind/http-transport`](https://github.com/Innmind/HttpTransport)
 
 <div markdown>
-- `logger(followRedirections(curl))` will only log the user calls and is unaware if the redirections are foolowed
+- `logger(followRedirections(curl))` will only log the user calls and is unaware if the redirections are followed
 - `followRedirections(logger(curl))` will log the user calls and every redirections
 - `circuitBreaker(logger(curl))` will not log calls to a domain that has previously failed
 - etc...
@@ -70,7 +70,7 @@ An example is an HTTP client (1) that provides a base implementation to do call 
 The big advantage is that you can compose them _locally_ depending on your needs (1).
 {.annotate}
 
-1. As opposed to the inheritance approach where you're limited by the statically defined combinations exposed
+1. As opposed to the inheritance approach where you're limited by the statically defined combinations exposed.
 
 Innmind heavily uses composition to adapt behaviours locally and allows you to compose the base implementations the way you wish.
 
@@ -107,8 +107,8 @@ Said like this, monads are very abstract concepts. So here's an example of the s
 === "Identity monad"
     ```php
     $value = Identity::of(1)
-        ->map(fn($value) => $value + 1)
-        ->flatMap(fn($value) => Identity::of($value * 2))
+        ->map(fn(int $value) => $value + 1)
+        ->flatMap(fn(int $value) => Identity::of($value * 2))
         ->unwrap();
     $value === 4; // true
     ```
@@ -132,11 +132,11 @@ When choosing our tools we are usually presented 2 choices: Hype vs Boring techn
 
 Innmind uses both OOP and FP to take advantages from both worlds.
 
-The easiness of combining data with associated methods and handling of multiple data (1) of OOP. The ease of mind of FP to only have to deal with the code in front of you (2).
+The easiness of combining data with associated methods and handling of mutable data (1) of OOP. The ease of mind of FP to only have to deal with the code in front of you (2).
 {.annotate}
 
 1. such as socket servers
-2. there's little chance to break the code on the other side of a program
+2. There's little chance to break the code on the other side of a program.
 
 *[OOP]: Object-Oriented Programming
 *[FP]: Functional Programming

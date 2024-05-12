@@ -42,7 +42,7 @@ new class extends Http {
 ??? info
     The notation `$app->map($middleware)` is just an invertion of who calls who for better chaining methods. If you look at the implementation it does `$middleware($app)`.
 
-Since the middleware is plain old PHP object, you can also add parameters to it.
+Since the middleware is a plain old PHP object, you can also add parameters to it.
 
 Let's say your program is a website that is accessible both in french and english. Instead of adding a parameter in every route and pass it around in every layer of your program you could do:
 

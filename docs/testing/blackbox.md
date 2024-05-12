@@ -2,7 +2,7 @@
 
 This is Innmind's own testing framework.
 
-It follows [Innmind's philosphy](../philosophy/index.md) meaning it can be integrated in other tools. It is self contained and do not rely on global state.
+It follows [Innmind's philosophy](../philosophy/index.md) meaning it can be integrated in other tools. It is self contained and do not rely on global state.
 
 ## Installation
 
@@ -35,7 +35,7 @@ Application::new($argv) #(1)
 This is the simplest setup of BlackBox. A PHP file (1) that bootstraps an `Application` to which is passed a function that will return a generator of tests and then exits.
 {.annotate}
 
-1. In this case `blackbox.php` but you can call it the way you wish.
+1. In this case the file is named `blackbox.php` but you can call it the way you want.
 
 And you simply run your tests via `php blackbox.php`.
 
@@ -111,7 +111,7 @@ In the end you have full control over the order your tests are loaded.
 
 After a while you may end up with a lot of tests and running them all all the time can be time consuming. You can categorize your tests via tags.
 
-You can declare a test with a tag this way:
+You declare them this way:
 
 ```php
 use Innmind\BlackBox\Tag;

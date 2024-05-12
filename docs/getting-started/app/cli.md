@@ -34,7 +34,7 @@ If you run `php cli.php` in your terminal it will print `Hello world`.
 
 You should already be familiar with the `$os` variable by now, if not go the [dedicated chapter](../operating-system/index.md).
 
-The `$env` variable is the abstraction to deal with everything inputed in your script and everything output that comes out. It behaves like an immutable object, meaning you **must** always use the new instance returned by its methods.
+The `$env` variable is the abstraction to deal with everything inputed in your script and every output that comes out. It behaves like an immutable object, meaning you **must** always use the new instance returned by its methods.
 
 To change the returned exit code you can do `return $env->exit(1)`.
 

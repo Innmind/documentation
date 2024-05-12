@@ -8,7 +8,7 @@ By explicit ear the facts that:
 
 - no code will have unforeseen global behaviour
 - no package installation will automatically change a behaviour of a program
-- you call Innmind code
+- you call Innmind code, not the other way around
 
 This means that to understand your program you can always _go to the definition_ of the function you're using. You can traverse your whole program from entrypoint to low level calls to the system with this approach.
 
@@ -53,11 +53,11 @@ This is why you'll find a lot of classes in Innmind that only hold data, the cla
 
 A constraint prevents us from doing some thing. Liberty is our ability to do what we want.
 
-The saying _constraints liberate, liberties constrain_ then may seem contradictory. Yet us abiding by the law is just that. The law prevents us from harming another citizen, this constraint liberate us from having to worry about someone else trying to harm us and consequently free us to think about more productive activities.
+The saying _constraints liberate, liberties constrain_ then may seem contradictory. Yet us abiding by the law is just that. The law prevents us from harming another citizen, this constraint liberates us from having to worry about someone else trying to harm us and consequently free us to think about more productive activities.
 
 As developers we tend to want to do whatever we want in our programs. But this limits us in the level of abstractions we can use.
 
-Innmind choose to apply constraints in order to build higher [abstractions](abstractions.md).
+Innmind chooses to apply constraints in order to build higher [abstractions](abstractions.md).
 
 ### Closed by default
 
@@ -71,4 +71,4 @@ For data this means to be very restrictive when [parsing](#parse-dont-validate).
 
 By having enough constraints it simplifies the maintainability of this ecosystem.
 
-All possible usages and possible values are known thanks to this constraints, meaning any modification can be safely released.
+All possible usages and possible values are known thanks to these constraints, meaning any modification can be safely released.

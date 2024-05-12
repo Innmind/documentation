@@ -2,7 +2,7 @@
 
 When your program runs across multiple processes you may want to communicate between them to update some state.
 
-Innmind IPC use unis sockets to send messages between processes.
+Innmind IPC use unix sockets to send messages between processes.
 
 ## Installation
 

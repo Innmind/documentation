@@ -54,7 +54,7 @@ composer global require innmind/dependency-graph:~3.5
 
 ### macOS App
 
-Instead of manually executing the CLI commands you can use this [macOS app](https://github.com/Innmind/macOS-tooling). You only to specify the organization you want to visualize and the app will fetch everything necessary.
+Instead of manually executing the CLI commands you can use this [macOS app](https://github.com/Innmind/macOS-tooling). You only need to specify the organization you want to visualize and the app will fetch everything necessary.
 
 ![](assets/dependency-graph/macOS-app.png)
 

@@ -90,7 +90,7 @@ new class extends Main {
 This example will send back the image at `images/some-image.png`. If the image is not found then it will throw an exception.
 
 ??? note
-    The `main` function will catch all thrown exceptions and will return an empty `500` response. This is done to make sure not stack trace is ever shown to a user.
+    The `main` function will catch all thrown exceptions and will return an empty `500` response. This is done to make sure no stack trace is ever shown to a user.
 
     During development if you want to see the exception you can catch all exceptions yourself and use `filp/whoops` to render it. Or you can use [Innmind's framework](../framework/index.md) and its [profiler](../framework/profiler.md).
 

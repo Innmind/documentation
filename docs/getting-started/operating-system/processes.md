@@ -31,7 +31,7 @@ $process
 This example waits for the installation of [`cowsay`](https://en.wikipedia.org/wiki/Cowsay) before continuing via `doStuff()` or it will fail with an exception.
 
 ??? note
-    By default the process is executed with no environment variables. If you try to execute a command that is reachable only because you modified your `$PATH` environment variable, you'll need to specify via `Command::foreground('command')->withEnvironment('$PATH', 'your path value')`.
+    By default the process is executed with no environment variables. If you try to execute a command that is reachable only because you modified your `$PATH` environment variable, you'll need to specify it via `Command::foreground('command')->withEnvironment('$PATH', 'your path value')`.
 
     This may seem restrictive at first but it's done to force your program to be [explicit](../../philosophy/explicit.md). And it will help other developers to understand what's needed for the command to be run.
 
@@ -55,7 +55,7 @@ $process
 This code will print the output of the underlying process in real time. The `foreach` call will return when the process is finished.
 
 ??? tip
-    If you still need to check the result of the process you can still call `#!php $process->wait()` that immediately return the result.
+    If you still need to check the result of the process you can still call `#!php $process->wait()`, it will immediately return the result.
 
 You can also send content to the `STDIN` of the process via:
 

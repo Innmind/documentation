@@ -132,7 +132,7 @@ Here we use a `string` to represent an email, instead [we should use an object](
     ```
 
 !!! success ""
-    Both approaches seem very similar but there's a big advantage to `Either`: a static analysis tool understand the flow of errors and can tell you if when calling `match` you don't handle all possible error values. No tool can help you do the same with exceptions.
+    Both approaches seem very similar but there's a big advantage to `Either`: a static analysis tool understands the flow of errors and can tell you if when calling `match` you don't handle all possible error values. No tool can help you do the same with exceptions.
 
 Just like `Maybe` you can recover in case of an error via the `otherwise` method. For example in the case the email is already used, instead of failing we can decide to update the stored user.
 

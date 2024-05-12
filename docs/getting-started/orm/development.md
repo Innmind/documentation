@@ -56,7 +56,7 @@ $orm = Manager::filesystem(InMemory::emulateFilesystem()); #(1)
     }
     ```
 
-    1. You'll learn more on why this annotation is required in the [production chapter](production.md)
+    1. This allows the ORM to know how to persist the data inside the collection.
 
     A `User` is called an aggregate in this ORM. This is the root object that have ownership of every data inside it (more on that below).
 
@@ -133,7 +133,7 @@ Even though we use the same `Address` object for both users the address will be 
 
 ## Retrieving an aggregate
 
-Once you persisted an aggregate you'll need to retrieve it, which pretty straight forward:
+Once you persisted an aggregate you'll need to retrieve it, which is pretty straight forward:
 
 ```php
 $repository
@@ -196,9 +196,9 @@ $repository
     ->foreach(static fn(User $user) => doStuff($user));
 ```
 
-Even with you have thousands of aggregates in your storage this code will work because the ORM keeps track of an aggregate as long as _you_ keep it in memory.
+Even if you have thousands of aggregates in your storage this code will work because the ORM keeps track of an aggregate as long as _you_ keep it in memory.
 
-Usually you won't want to retrieve all aggregates, you need only a subset. You could use `#!php $repository->all()->filter()` but this fairly innefficient as it retrieve all aggregates and throw out the ones you don't one.
+Usually you won't want to retrieve all aggregates, you need only a subset. You could use `#!php $repository->all()->filter()` but this is fairly innefficient as it retrieve all aggregates and throw out the ones you don't use.
 
 The best approach is to filter directly at the storage level. You do this via the [specification pattern](../operating-system/sql.md#filtering).
 
@@ -246,7 +246,7 @@ final class City implements Comparator
 1. This is the name of the property in the `Address` class.
 2. This return type has to be the same as the one on the property.
 
-And you use like this:
+And you use it like this:
 
 ```php
 use Formal\ORM\Specification\Child;

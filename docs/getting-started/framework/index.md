@@ -8,7 +8,7 @@ composer require innmind/framework:~2.2
 
 ## Concepts
 
-The framework is defined by an entrypoint defines the context in which the framework will be run. Each entrypoint exposes a `configure` method to configure an immutable `Application` object.
+The framework is defined by an entrypoint that specify the context in which the framework will be run. Each entrypoint exposes a `configure` method to configure an immutable `Application` object.
 
 `Application` is the way to describe what your program can do. This is the same class no matter which entrypoint you choose. This allows you to switch the execution context without modifying any line of your code (1).
 {.annotate}

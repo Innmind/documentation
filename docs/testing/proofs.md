@@ -32,7 +32,7 @@ The most important part here is the `Set`s passed to `given`. A `Set` defines a 
 
 In essence this proof does **exactly** the same thing as the previous test.
 
-Now if we want to generate mutiple scenarii:
+Now if we want to generate mutiple scenario:
 
 ```php
 use Innmind\BlackBox\{
@@ -112,7 +112,7 @@ Application::new([])
 
 1. Where `0` is placed doesn't matter thanks to the commutative proof above.
 
-Each time you'll run these proofs BlackBox will run `100` scenarii per proof with different values each time. This way the more you run these proofs the more BlackBox the _values space_ to try a specific combination that makes the `add` function fail.
+Each time you'll run these proofs BlackBox will run `100` scenarii per proof with different values each time. This way the more you run these proofs the more BlackBox explores the _values space_ to try to find a specific combination that makes the `add` function fail.
 
 You should explore the `Innmind\BlackBox\Set\` namespace to see all the values you can generate. `Set`s can be composed so you're not limited to primitive values, you can build pretty much any data structure.
 

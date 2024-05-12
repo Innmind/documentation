@@ -201,7 +201,7 @@ Since you'll not always have all the values known when creating a `Sequence`, yo
 ??? tip
     You may also come across the notation `#!php $values = Sequence::of('foo')('bar')('baz')` in the ecosystem. This is a more _math like_ notation to look like a matrix augmentation.
 
-    You check the implementation of `Sequence::add()` you'll see that it is a shortcut to the `__invoke` method that allows this notation.
+    You check the implementation of `Sequence::add()` you'll see that it is an alias to the `__invoke` method that allows this notation.
 
 If instead of adding a single value to the list you need to add multiple ones you would do:
 
@@ -289,7 +289,7 @@ For example let's you have a list of cities and you only want to keep the french
     ```
 
 ??? tip
-    And of instead you want all the cities outside of France you can replace `filter` by `exclude`.
+    And if instead you want all the cities outside of France you can replace `filter` by `exclude`.
 
 The `filter` method is fine if you don't need the new `Sequence` type to change, here we go from `Sequence<string>` to `Sequence<string>`. But if you have a `Sequence<null|\SplFileObject>` and you want to remove the `null` values then `filter`, even though will do the job, will return a `Sequence<null|\SplFileObject>`. This is a limitation of [Psalm](../../philosophy/development.md#type-strictness).
 
@@ -307,7 +307,7 @@ $values; // Sequence<\SplFileObject>
 
 ### Pipeline
 
-So far you've only seen how to do one action at a time. The simplicity of `Sequence` starts to shine when chaning multiple actions.
+So far you've only seen how to do one action at a time. The simplicity of `Sequence` starts to shine when chaining multiple actions.
 
 Let's try to retrieve all the visited cities for each username, keep the french ones and remove the country from the name.
 
@@ -397,7 +397,7 @@ Let's try to retrieve all the visited cities for each username, keep the french 
 
 With the declarative and imperative approach you have to deal with either a lot of indentation or a lot of variables. With a `Sequence` you just keep chaining methods.
 
-Another nice upside to `Sequence` is when you try to build a pipeline and to see the different results if you switch some logic around. To achieve it you only need to move a method call up or down, while the other approached you need to be aware of conflicting variables.
+Another nice upside to `Sequence` is when you try to build a pipeline and want to see the different results if you switch some logic around. To achieve it you only need to move a method call up or down, while the other approaches you need to be aware of conflicting variables.
 
 ## Extracting data
 
@@ -475,7 +475,7 @@ At some point you'll need to extract the values contained in a `Sequence` (1). S
     $value2 === null; // returns true
     ```
 
-??? Note
+??? info
     The imperative approach could be simplified via `#!php $values[$index] ?? null`, but then if the value at the index is itself `null` you can't differentiate if the index exists or not.
 
 ### And more
@@ -492,10 +492,10 @@ This is the mode you've seen so far. When calling `Sequence::of()` you specify a
 
 ### Deferred
 
-Instead of specyfying the values you can use a `Generator` to populate the `Sequence`. Once a value is loaded it's kept in memory. The advantage is that you can loop over the same geenrator multiple times (1).
+Instead of specyfying the values you can use a `Generator` to populate the `Sequence`. Once a value is loaded it's kept in memory. The advantage is that you can loop over the same generator multiple times (1).
 {.annotate}
 
-1. Using a `Generator` directly requires to call again the function that created it. But this means you may not end up with the same values (especially if geenrating objects).
+1. Using a `Generator` directly requires to call again the function that created it. But this means you may not end up with the same values (especially if generating objects).
 
 ```php
 $values = Sequence::of(1, 2, 3, 4);
@@ -515,7 +515,7 @@ The `Sequence` is then used exactly the same way as an in memory one.
 
 ### Lazy
 
-With this mode you build a `Sequence` by passing a function that returns a `Generator`. This generator will be called each time you try to extract some data from the `Sequence`.
+With this mode you build a `Sequence` by passing a function that returns a `Generator`. This function will be called each time you try to extract some data from the `Sequence`.
 
 ```php
 $values = Sequence::lazy(static function() {
@@ -536,7 +536,7 @@ The `Sequence` is then used exactly the same way as an in memory one.
     1. Such as reading a multi gigabyte file or reading from a socket.
 
 ??? info
-    This is where lies the root of the power of Innmind. Being able to work with infinte volumes of data as it were in memory.
+    This is where lies the root of the power of Innmind. Being able to work with infinte volumes of data as if it were in memory.
 
 ### Tips
 

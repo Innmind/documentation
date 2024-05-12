@@ -67,11 +67,12 @@ $client
 
 1. For now don't worry about this `null`, just know that it's required.
 
-The client will execute anything only when the `run` method is run. In this case, because we reuse the client from aboce, it will create the exchange, the queue and bind them together and then publish one message that will end up in the queue.
+The client will execute anything only when the `run` method is called. In this case, because we reuse the client from above, it will create the exchange, the queue and bind them together and then publish one message that will end up in the queue.
 
 If everything works fine then it will return an [`Either`](../handling-data/either.md) with `null` on the right side. If any error occurs it will be a `Failure` on the left side.
 
-Using a client that always declare the the exchange and queues that it requires allows for a hot declaration of your infrastructure when you try to use the client. And if the exchanges, queues and bindings already exist it will silently continue to execute as the structure is the way you expect on the AMQP server.
+??? info
+    Using a client that always declare the the exchange and queues that it requires allows for a hot declaration of your infrastructure when you try to use the client. And if the exchanges, queues and bindings already exist it will silently continue to execute as the structure is the way you expect on the AMQP server.
 
 Then to consume the queue:
 
@@ -113,7 +114,7 @@ Here we reuse the client from the first example to make sure we indeed have a `p
 
 At this point the `run` method will return `42` on the right side of the `Either` or a failure on the left side.
 
-In this case the carried value is an `int` but you can use any type you wish.
+In this case the carried value is an `int` but you can use any type you want.
 
 ??? tip
     If you only need to pull one message from the queue you should use `Innmind\AMQP\Command\Get` instead of `Consume`.

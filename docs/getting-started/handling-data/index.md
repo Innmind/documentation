@@ -4,10 +4,10 @@ Handling data is an essential part of any program. Handling them simply and in a
 
 In this chapter you'll find the 3 most used data structures throughout Innmind.
 
-You'll learn how to them for simple cases and how they become indispensable as a program grow.
+You'll learn how to them for simple cases and how they become indispensable as a program grows.
 
 ??? note
-    Head to the [package documentation](https://github.com/Innmind/Immutable/blob/develop/docs/README.md) to learn about the other data structures.
+    Head to the [package documentation](https://github.com/Innmind/Immutable/) to learn about the other data structures.
 
 ## Installation
 

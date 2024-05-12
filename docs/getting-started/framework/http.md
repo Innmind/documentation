@@ -23,7 +23,7 @@ new class extends Http {
 };
 ```
 
-You can expose this server via `cd public/ && php -S localhost:8080`. If you run `curl http://localhost:8080/` it will return a `404` response which is the default behaviour when you dn'ont specify any route.
+You can expose this server via `cd public/ && php -S localhost:8080`. If you run `curl http://localhost:8080/` it will return a `404` response which is the default behaviour when you didn't specify any route.
 
 You can define a route like this:
 
@@ -52,7 +52,7 @@ new class extends Http {
 
 Now `curl http://localhost:8080/` will return a `200` response with the content `Hello world`.
 
-You can specify placeholder in your routes like this:
+You can specify placeholders in your routes like this:
 
 ```php title="public/index.php" hl_lines="1 7 10 15"
 use Innmind\Router\Route\Variables;
@@ -106,7 +106,7 @@ new class extends Http {
     - `$request` is the parsed request sent by a user
     - `$variables` gathers all the values described by the route template
     - `$container` is a service locator
-    - `$os` you've seen it in the previous chapter
+    - `$os` you've seen it in a previous chapter
     - `$env` contains the environment variables
 
 ## Composition
@@ -121,7 +121,7 @@ new class extends Http {
     {
         return $app
             ->mapRequestHandler(
-                static fn(RequestHandle $route) => new class($route) implements RequestHandler {
+                static fn(RequestHandler $route) => new class($route) implements RequestHandler {
                     public function __construct(
                         private RequestHandler $inner,
                     ) {}
