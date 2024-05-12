@@ -1,0 +1,157 @@
+site_name: Innmind
+site_description: The functional ecosystem
+repo_name: innmind/documentation
+
+nav:
+  - Home: index.md
+  - Philosophy:
+    - philosophy/index.md
+    - OOP & FP: philosophy/oop-fp.md
+    - Semantic: philosophy/semantic.md
+    - Simplicity: philosophy/simplicity.md
+    - Explicit: philosophy/explicit.md
+    - Capabilities: philosophy/capabilities.md
+    - Abstractions: philosophy/abstractions.md
+    - Development Process: philosophy/development.md
+  - Getting started:
+    - getting-started/index.md
+    - Handling data:
+      - getting-started/handling-data/index.md
+      - Sequence: getting-started/handling-data/sequence.md
+      - Maybe: getting-started/handling-data/maybe.md
+      - Either: getting-started/handling-data/either.md
+    - Operating System:
+      - getting-started/operating-system/index.md
+      - Clock: getting-started/operating-system/clock.md
+      - HTTP: getting-started/operating-system/http.md
+      - Filesystem: getting-started/operating-system/filesystem.md
+      - SQL: getting-started/operating-system/sql.md
+      - PHP Process: getting-started/operating-system/php-process.md
+      - Processes: getting-started/operating-system/processes.md
+      - Monitoring: getting-started/operating-system/monitoring.md
+      - Network: getting-started/operating-system/network.md
+    - App:
+      - CLI: getting-started/app/cli.md
+      - HTTP: getting-started/app/http.md
+    - Framework:
+      - getting-started/framework/index.md
+      - CLI: getting-started/framework/cli.md
+      - HTTP: getting-started/framework/http.md
+      - Middlewares: getting-started/framework/middlewares.md
+      - Profiler: getting-started/framework/profiler.md
+      - Extensions: getting-started/framework/extensions.md
+    - ORM:
+      - getting-started/orm/index.md
+      - Development: getting-started/orm/development.md
+      - Production: getting-started/orm/production.md
+      - Testing: getting-started/orm/testing.md
+    - Concurrency:
+      - getting-started/concurrency/index.md
+      - HTTP calls: getting-started/concurrency/http.md
+      - Asynchronous code: getting-started/concurrency/async.md
+      - Queues: getting-started/concurrency/queues.md
+      - Inter Process Communication: getting-started/concurrency/ipc.md
+      - Distributed: getting-started/concurrency/distributed.md
+  - Use cases:
+    - use-cases/index.md
+    - Upload a local file via HTTP: use-cases/upload-local-file.md
+    - Copy a local directory to S3: use-cases/copy-local-directory-to-s3.md
+    - Serve a S3 file via an HTTP server: use-cases/serve-s3-file.md
+    - Persist a SQL result to a file: use-cases/persist-sql-result-to-file.md
+    - Persist crawled links to a database: use-cases/persist-crawled-links-to-database.md
+    - Creating an archive of a directory: use-cases/creating-archive-directory.md
+    - Wait for a server to start: use-cases/wait-server-start.md
+  - Testing:
+    - testing/index.md
+    - Property Based testing: testing/property-based-testing.md
+    - BlackBox: testing/blackbox.md
+    - Tests: testing/tests.md
+    - Proofs: testing/proofs.md
+    - Properties: testing/properties.md
+  - Tools: tools.md
+  - Other Packages: packages.md
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  font: false
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: blue
+      accent: deep orange
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: blue
+      accent: deep orange
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: blue
+      accent: deep orange
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      extend_pygments_lang:
+        - name: php
+          lang: php
+          options:
+            startinline: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - abbr
+  - admonition
+  - pymdownx.details:
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+plugins:
+  - search
+  - privacy
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Innmind
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/Baptouuuu
