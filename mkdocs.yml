@@ -70,6 +70,8 @@ nav:
     - Properties: testing/properties.md
   - Tools: tools.md
   - Other Packages: packages.md
+  - Blog:
+    - blog/index.md
 
 theme:
   name: material
@@ -148,6 +150,8 @@ extra_css:
 plugins:
   - search
   - privacy
+  - blog:
+      post_url_date_format: yyyy/MM
 
 extra:
   social:
