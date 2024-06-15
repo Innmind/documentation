@@ -152,6 +152,8 @@ plugins:
   - privacy
   - blog:
       post_url_date_format: yyyy/MM
+  - rss:
+      match_path: blog/posts/.*
 
 extra:
   social:
