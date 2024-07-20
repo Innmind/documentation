@@ -1,6 +1,6 @@
 # ORM
 
-This ORM focuses to simplify data manipulation.
+This ORM focuses on simplifying data manipulation.
 
 !!! success ""
     It can handle any amount of data by being memory safe and reduces the complexity of data lifecycle by using immutable objects.
