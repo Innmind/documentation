@@ -45,4 +45,8 @@ Since it focuses on usage and not _abstracting a persistence model_ this ORM all
 - Filesystem
 - Elasticsearch
 
+## Advanced usage
+
+Full documentation available [here](https://formal-php.github.io/orm/).
+
 *[ORM]: Object Relational Mapping

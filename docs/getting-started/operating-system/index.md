@@ -46,3 +46,7 @@ Here we tell the abstraction that we work on a case insensitive filesystem and t
 {.annotate}
 
 1. You should do this only when working locally. Do **NOT** do this in production.
+
+## Advanced usage
+
+Full documentation available [here](https://innmind.github.io/OperatingSystem/).

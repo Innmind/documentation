@@ -14,3 +14,7 @@ You'll learn how to them for simple cases and how they become indispensable as a
 ```sh
 composer require innmind/immutable:~5.3
 ```
+
+## Advanced usage
+
+Full documentation available [here](http://innmind.github.io/Immutable/).
