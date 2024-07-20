@@ -11,7 +11,7 @@ This ORM focuses on simplifying data manipulation.
 ## Installation
 
 ```sh
-composer require formal/orm:~2.0
+composer require formal/orm:~3.0
 ```
 
 ## Example

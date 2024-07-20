@@ -206,45 +206,26 @@ Let's say we want all users with an address in `London`. First we need to build 
 
 ```php
 use Innmind\Specification\{
-    Comparator,
-    Composable,
+    Comparator\Property,
     Sign,
 };
 
-/** @psalm-immutable */
-final class City implements Comparator
+final class City
 {
-    use Composable;
-
-    private function __construct(
-        private string $city,
-    ) {}
-
     /** @psalm-pure */
-    public static function of(string $city): self
+    public static function of(string $city): Property
     {
-        return new self($city);
-    }
-
-    public function property(): string
-    {
-        return 'city'; #(1)
-    }
-
-    public function sign(): Sign
-    {
-        return Sign::equality;
-    }
-
-    public function value(): string #(2)
-    {
-        return $this->city;
+        return Property::of(
+            'city', #(1)
+            Sign::equality,
+            $city, #(2)
+        );
     }
 }
 ```
 
 1. This is the name of the property in the `Address` class.
-2. This return type has to be the same as the one on the property.
+2. This type has to be the same as the one on the property.
 
 And you use it like this:
 
@@ -340,15 +321,7 @@ final readonly class User
 The last part is to tell the ORM how to convert this type. You need to create a class implementing the `Type` interface.
 
 ```php
-use Formal\ORM\Definition\{
-    Type,
-    Types,
-};
-use Innmind\Type\{
-    Type as Concrete,
-    ClassName,
-};
-use Innmind\Immutable\Maybe;
+use Formal\ORM\Definition\Type;
 
 /**
  * @psalm-immutable
@@ -356,20 +329,6 @@ use Innmind\Immutable\Maybe;
  */
 final class UsernameType implements Type
 {
-    /**
-     * @psalm-pure
-     *
-     * @return Maybe<self>
-     */
-    public static function of(Types $types, Concrete $type): Maybe
-    {
-        return Maybe::just($type)
-            ->filter(static fn($type) => $type->accepts(
-                ClassName::of(Username::class) #(1)
-            ))
-            ->map(static fn() => new self);
-    }
-
     public function normalize(mixed $value): null|string|int|bool
     {
         return $value->toString();
@@ -398,13 +357,14 @@ use Formal\ORM\{
     Manager,
     Definition\Aggregates,
     Definition\Types,
+    Definition\Type\Support,
 };
 use Innmind\Filesystem\Adapter\InMemory;
 
 $orm = Manager::filesystem(
     InMemory::emulateFilesystem(),
     Aggregates::of(Types::of(
-        Username::of(...),
+        Support::class(Username::class, new Username),
     )),
 );
 ```
