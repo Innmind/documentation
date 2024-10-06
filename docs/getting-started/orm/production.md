@@ -54,8 +54,8 @@ This code automatically execute the queries to create the tables. You could inst
 
 1. `#!php $_ = $show(User::class)->foreach(var_dump(...));`
 
-??? warning
-    Unfortunately Innmind doesn't have a migration package yet. For now you could use [`doctrine/migrations`](https://packagist.org/packages/doctrine/migrations).
+??? tip
+    You can use [`formal/migrations`](https://formal-php.github.io/migrations/) to run your migrations.
 
 ## Elasticsearch
 
