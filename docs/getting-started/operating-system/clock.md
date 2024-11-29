@@ -18,22 +18,19 @@ And to ease the manipulation, all objects are immutable.
 ```php
 use Innmind\TimeContinuum\{
     PointInTime,
-    Earth\Format\ISO8601,
+    Format,
 };
 
 echo $os
     ->clock()
     ->now() // returns a PointInTime object
-    ->format(new ISO8601);
+    ->format(Format::iso8601());
 ```
 
 This will print something like `2024-05-04T13:05:01+02:00`.
 
 !!! tip ""
-    You can specify your own formats by implementing the `Innmind\TimeContinuum\Format` interface. The format itself is described by a string that must be understood by the `\DateTimeInterface::format()` method.
-
-??? info
-    The format to transform a `PointInTime` to a `string` has to specified via an object to force you to give a name to a specific format in order to avoid to spread magic strings in your whole codebase.
+    You can specify your own formats with the named constructor `Innmind\TimeContinuum\Format::of()`. The format itself is described by a string that must be understood by the `\DateTimeInterface::format()` method.
 
 On a `PointInTime` you can access every part of the time it references (year, month, day, etc...), and has methods to modify the time to move forward or backward in time.
 
@@ -47,14 +44,14 @@ When you receive a `string` (1) that represent a date and you want to convert it
 ```php
 $point = $os
     ->clock()
-    ->at($string, new ISO8601) #(1)
+    ->at($string, Format::iso8601()) #(1)
     ->match(
         static fn(PointInTime $point) => $point,
         static fn() => throw new \RuntimeException("'$string' is not a valid date"),
     );
 ```
 
-1. The format is optional but you **should** specify one to avoid implicit convertions.
+1. The format is required to avoid implicit convertions.
 
 The `at` method returns the `Maybe<PointInTime>` type to make sure you always handle the case the `$string` is invalid.
 
@@ -80,7 +77,7 @@ $duration = $os
     ->elapsedSince($start);
 ```
 
-Here `$duration` is an instance of `Innmind\TimeContinuum\ElapsedPeriod` that contains the number of milliseconds between the 2 points in time. And it handles the case that your machine may go back in time.
+Here `$duration` is an instance of `Innmind\TimeContinuum\ElapsedPeriod` that contains the number of seconds, milliseconds and microseconds between the 2 points in time. And it handles the case that your machine may go back in time.
 
 ??? info
     The time shift is handled when working with objects coming from `$clock->now()`, this is not the case when working with objects coming from `$clock->at()`.
@@ -88,3 +85,7 @@ Here `$duration` is an instance of `Innmind\TimeContinuum\ElapsedPeriod` that co
 ## In the ecosystem
 
 All packages that depend on this abstraction use this clock, but this abstraction itself also uses this clock. So no matter the level of abstractions you work on you can change the clock implementation in your tests.
+
+## Full documentation
+
+A more extensive documentation can be found at <https://innmind.org/TimeContinuum/>.
