@@ -23,7 +23,7 @@ But because having one process per actor would be too expensive in resources, it
 
 ## Work in progress
 
-The implementation of this model is still underway at [`innmind/witness`](https://github.com/Innmind/witness).
+The implementation of this model is still underway at [`innmind/actors`](https://github.com/Innmind/actors).
 
 There's been quite a gap in activity on this repository because early work on the implementation revealed that the use of exceptions was untenable for the system stability.
 
