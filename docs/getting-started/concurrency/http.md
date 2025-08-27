@@ -84,13 +84,16 @@ You can configure the max concurrency at the start of your program and leave you
 
 === "Operating System"
     ```php
-    use Innmind\OperatingSystem\{
-        Factory,
-        Config,
-    };
+    use Innmind\OperatingSystem\Config;
+    use Innmind\HttpTransport\Curl;
 
-    $os = Factory::build(
-        Config::of()->limitHttpConcurrencyTo(20),
+    $os = $os->map(
+        static fn($config) => $config->useHttpTransport(
+            Curl::of(
+                $os->clock(),
+                $config->io(),
+            )->maxConcurrency(20),
+        ),
     );
 
     // rest of your script
@@ -103,8 +106,17 @@ You can configure the max concurrency at the start of your program and leave you
         Application,
     };
     use Innmind\OperatingSystem\Config;
+    use Innmind\HttpTransport\Curl;
 
-    new class(Config::of()->limitHttpConcurrencyTo(20)) extends Cli {
+    $config = Config::of();
+    $config = $config->useHttpTransport(
+        Curl::of(
+            $config->clock(),
+            $config->io(),
+        )->maxConcurrency(20),
+    );
+
+    new class($config) extends Cli {
         protected function configure(Application $app): Application
         {
             // configure your app here
@@ -125,8 +137,17 @@ You can configure the max concurrency at the start of your program and leave you
         OperatingSystem,
         Config,
     };
+    use Innmind\HttpTransport\Curl;
 
-    new class(Config::of()->limitHttpConcurrencyTo(20)) extends Main {
+    $config = Config::of();
+    $config = $config->useHttpTransport(
+        Curl::of(
+            $config->clock(),
+            $config->io(),
+        )->maxConcurrency(20),
+    );
+
+    new class($config) extends Main {
         protected function main(Environment $env, OperatingSystem $os): Environment
         {
             // your code here
@@ -145,8 +166,17 @@ You can configure the max concurrency at the start of your program and leave you
         Response,
     };
     use Innmind\OperatingSystem\Config;
+    use Innmind\HttpTransport\Curl;
 
-    new class(Config::of()->limitHttpConcurrencyTo(20)) extends Main {
+    $config = Config::of();
+    $config = $config->useHttpTransport(
+        Curl::of(
+            $config->clock(),
+            $config->io(),
+        )->maxConcurrency(20),
+    );
+
+    new class($config) extends Main {
         protected function main(ServerRequest $request): Response
         {
             // your code here

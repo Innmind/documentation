@@ -35,6 +35,7 @@ use Innmind\Immutable\Predicate\Instance;
 $os
     ->filesystem()
     ->mount(Path::of('some directory/')) #(1)
+    ->unwrap()
     ->get(Name::of('some-file.txt'))
     ->keep(Instance::of(File::class))
     ->match(
@@ -53,6 +54,7 @@ use Innmind\Filesystem\Directory;
 $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->get(Name::of('sub folder'))
     ->keep(Instance::of(Directory::class))
     ->flatMap(static fn(Directory $directory) => $directory->get(
@@ -73,6 +75,7 @@ If you want to access all the files at the root of the adapter you can do:
 $files = $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->root()
     ->all()
     ->keep(Instance::of(File::class));
@@ -87,10 +90,12 @@ To add a file at the root of the adapter you can do:
 $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->add(File::named(
         'some name',
         Content::ofString('the file content'),
-    ));
+    ))
+    ->unwrap();
 ```
 
 ??? note
@@ -109,6 +114,7 @@ If you want to create a file inside a directory you can do:
 $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->add(
         Directory::named('sub folder')->add(
             File::named(
@@ -116,7 +122,8 @@ $os
                 Content::ofString('the file content'),
             ),
         ),
-    );
+    )
+    ->unwrap();
 ```
 
 !!! note
@@ -130,7 +137,9 @@ If you want to remove a file/directory at the root of the adapter you can do:
 $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
-    ->remove(Name::of('some file'));
+    ->unwrap()
+    ->remove(Name::of('some file'))
+    ->unwrap();
 ```
 
 !!! note
@@ -144,11 +153,13 @@ To remove a file inside a directory you _add a new version of the directory_:
 $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->add(
         Directory::named('sub folder')->remove(
             Name::of('some file'),
         ),
-    );
+    )
+    ->unwrap();
 ```
 
 ??? info
@@ -159,7 +170,7 @@ $os
 Let's say you have a log file that you want to duplicate but containing only the errors you can do:
 
 ```php
-$adapter = $os->filesystem()->mount(Path::of('logs/'));
+$adapter = $os->filesystem()->mount(Path::of('logs/'))->unwrap();
 $adapter
     ->get(Name::of('prod.log'))
     ->keep(Instance::of(File::class))
@@ -177,7 +188,7 @@ $adapter
             ),
     )
     ->match(
-        static fn(File $file) => $adapter->add($file),
+        static fn(File $file) => $adapter->add($file)->unwrap(),
         static fn() => null, // prod.log doesn't exist
     );
 ```
@@ -197,7 +208,7 @@ You can use `Content::map()` to change each line of a file. `Content::flatMap()`
                 ->map(static fn(Line $line) => Line::of(Str::of('some value'))),
         ))
         ->match(
-            static fn(File $file) => $adapter->add($file),
+            static fn(File $file) => $adapter->add($file)->unwrap(),
             static fn() => null,
         );
     ```

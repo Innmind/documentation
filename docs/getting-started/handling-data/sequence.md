@@ -581,7 +581,7 @@ Sequence::lazy(static function() {
 
 If you call the `foreach` method you won't be able to use the returned value as it's an object that does nothing. It's returned because `Sequence` is an immutable class, meaning all methods **must** return a value otherwise Psalm tells that the method is useless.
 
-But you still need to assigned the returned value to a variable `$_` (1) otherwise Psalm will tell you that the call to `foreach` does nothing.
+But you still need to assign the returned value to a variable `$_` (1) otherwise Psalm will tell you that the call to `foreach` does nothing.
 {.annotate}
 
 1. Called a sink. Psalm won't run any analysis on this variable because it starts with an underscore.

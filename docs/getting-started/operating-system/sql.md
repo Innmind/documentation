@@ -102,42 +102,20 @@ For example let's say you want to retrieve all users whose username starts with 
 
 ```php
 use Innmind\Specification\{
-    Comparator,
-    Composable,
+    Comparator\Property,
     Sign,
 };
 
-/** @psalm-immutable */
-final class Username implements Comparator
+final class Username
 {
-    use Composable;
-
-    private string $value;
-
-    private function __construct(string $value)
-    {
-        $this->value = $value;
-    }
-
     /** @psalm-pure */
-    public static function startsWith(string $value): self
+    public static function startsWith(string $value): Property
     {
-        return new self($value);
-    }
-
-    public function property(): string
-    {
-        return 'username'; #(1)
-    }
-
-    public function sign(): Sign
-    {
-        return Sign::startsWith;
-    }
-
-    public function value(): string
-    {
-        return $this->value;
+        return Property::of(
+            'username', #(1),
+            Sign::startsWith,
+            $value,
+        );
     }
 }
 ```

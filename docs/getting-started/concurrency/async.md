@@ -2,27 +2,19 @@
 
 Since Innmind offers to access all I/O operations through the [operating system abstraction](../operating-system/index.md), it can easily execute these operations asynchronously.
 
-## Installation
-
-```sh
-composer require innmind/mantle:~2.1
-```
-
 ## Usage
 
-Mantle works a bit like a reduce operation. The _reducer_ function allows to launch `Task`s and react to their results. Both the _reducer_ and tasks are run asynchronously.
+Async works a bit like a reduce operation. The _reducer_ function allows to launch tasks and react to their results. Both the _reducer_ and tasks are run asynchronously.
 
 === "Script"
     ```php
-    use Innmind\Mantle\Forerunner;
+    use Innmind\Async\Scheduler;
     use Innmind\Http\Response;
     use Innmind\Immutable\Sequence;
 
-    $run = Forerunner::of($os);
-    $responses = $run(
-        Carried::new(),
-        new Reducer,
-    );
+    $responses = Scheduler::of($os)
+        ->sink(Carried::new())
+        ->with(new Reducer);
     $responses; // instance of Sequence<?Response>
     ```
 
@@ -79,10 +71,7 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
 
 === "Reducer"
     ```php
-    use Innmind\Mantle\{
-        Source\Continuation,
-        Task,
-    };
+    use Innmind\Async\Scope\Continuation;
     use Innmind\OperatingSystem\OperatingSystem;
     use Innmind\Http\Response;
     use Innmind\Immutable\Sequence;
@@ -91,7 +80,7 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
     {
         /**
          * @param Continuation<Carried> $continuation
-         * @param Sequence<?Response> $results
+         * @param Sequence<mixed> $results
          *
          * @return Continuation<Carried>
          */
@@ -104,18 +93,14 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
             if ($carried->needsToLaunchTasks()) {
                 return $continuation
                     ->carryWith($carried->tasksLaunched()) #(3)
-                    ->launch(Sequence::of(
-                        Task::of( #(4)
-                            static fn(OperatingSystem $os) => MyTask::of(
-                                $os,
-                                'https://github.com/'
-                            ),
+                    ->schedule(Sequence::of(
+                        static fn(OperatingSystem $os) => MyTask::of( #(4)
+                            $os,
+                            'https://github.com/'
                         ),
-                        Task::of(
-                            static fn(OperatingSystem $os) => MyTask::of(
-                                $os,
-                                'https://gitlab.com/'
-                            ),
+                        static fn(OperatingSystem $os) => MyTask::of(
+                            $os,
+                            'https://gitlab.com/'
                         ),
                     ));
             }
@@ -131,19 +116,21 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
             if ($carried->responses()->size() === 2) {
                 return $continuation
                     ->carryWith($carried)
-                    ->terminate(); #(5)
+                    ->finish(); #(5)
             }
 
-            return $continuation->carryWith($carried);
+            return $continuation
+                ->carryWith($carried)
+                ->wakeOnResult();
         }
     }
     ```
 
-    1. This `$os` variable is a new instance built by Mantle and runs asynchronously.
+    1. This `$os` variable is a new instance built by Async and runs asynchronously.
     2. This will contain the values returned by the tasks as soon as available.
     3. We flip the flag in order to not launch the tasks each time the reducer is called.
-    4. The `$os` variable below is a dedicated new instance for each task.
-    5. This tells Mantle to stop calling the reducer and return the carried value.
+    4. The `$os` variable is a dedicated new instance for each task.
+    5. This tells Async to stop calling the reducer and return the carried value.
 
     This `__invoke` method will be called once when starting the runner and then each time a task finishes.
 
@@ -186,7 +173,7 @@ Mantle works a bit like a reduce operation. The _reducer_ function allows to lau
 The first big advantage of this design is that your task is completely unaware that it is run asynchronously. It all depends on the `$os` variable injected (1). This means that you can easily experiment a piece of your program in an async context by what code calls it, your program logic itself doesn't have to change!
 {.annotate}
 
-1. If it comes from Mantle it's async otherwise it's sync.
+1. If it comes from Async it's async otherwise it's sync.
 
 The side effect of this is that you can test your code synchronously even though it's run asynchronously.
 
@@ -194,10 +181,9 @@ The other advantage is that since all state is local you can compose async code 
 
 ## Limitations
 
-- CLI signals are currently not supported in this context
 - HTTP calls are currently done via `cURL` and uses micro sleeps instead of watching sockets
 - SQL queries are still run synchronously for now
-- It seems there is a limit of 10k concurrent tasks before performance degradation
+- It seems there is a limit of 100k concurrent tasks before performance degradation
 
 Most of these limitations are planned to be fixed in the future.
 

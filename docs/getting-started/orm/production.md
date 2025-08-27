@@ -145,7 +145,7 @@ You should this storage for small programs without much concurrency that you nee
 First you need to require the S3 package:
 
 ```sh
-composer require innmind/s3:~4.1
+composer require innmind/s3 '~5.0'
 ```
 
 Then configure the ORM:

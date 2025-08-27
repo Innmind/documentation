@@ -1,7 +1,7 @@
 # Serve a S3 file via an HTTP server
 
 ```sh
-composer require innmind/s3:~4.1
+composer require innmind/s3 '~5.0'
 ```
 
 ```php
@@ -22,6 +22,7 @@ use Innmind\Http\{
     Headers,
     Header\ContentType,
 };
+use Innmind\MediaType\MediaType;
 use Innmind\Url\Url;
 
 new class extends Http {
@@ -46,13 +47,13 @@ new class extends Http {
                             static fn($file) => Response::of(
                                 StatusCode::ok,
                                 $request->protocolVersion(),
-                                Headers::of(ContentType::of(
+                                Headers::of(ContentType::of(new MediaType(
                                     $file->mediaType()->topLevel(),
                                     $file->mediaType()->subType(),
-                                )),
+                                ))),
                                 $file->content(),
                             ),
-                            static fn() => new Response(
+                            static fn() => Response::of(
                                 StatusCode::notFound,
                                 $request->protocolVersion(),
                             ),

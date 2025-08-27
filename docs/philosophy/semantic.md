@@ -12,6 +12,7 @@ By establishing a good vocabulary it's possible to convey more and more complex 
 $os
     ->filesystem()
     ->mount(Path::of('folder/'))
+    ->unwrap()
     ->get(Name::of('file'))
     ->keep(Instance::of(File::class))
     ->match(

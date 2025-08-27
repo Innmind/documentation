@@ -7,7 +7,7 @@ It follows [Innmind's philosophy](../philosophy/index.md) meaning it can be inte
 ## Installation
 
 ```sh
-composer require --dev innmind/black-box:~5.6
+composer require --dev innmind/black-box '~6.5'
 ```
 
 ## Setup

@@ -34,15 +34,15 @@ $http($request)->match(
 When sending an HTTP request it will return an `Either<Failure|ConnectionFailed|MalformedResponse|Information|Redirection|ClientError|ServerError, Success>`, where each of this classes are located in the `Innmind\HttpTransport\` namespace. This type may be scarry at first but it allows you to use static analysis to deal with every possible situation (or not by throwing an exception like in the example). No more surprises of uncaught exceptions in production!
 
 ??? info
-    Responses are wrapped in classes such as `Success`, `Redirection`, etc... to avoid confusion as a response can be on both sides of the `Either`. This way you now for sure a `2XX` response is on the right side and the other ones on the left one.
+    Responses are wrapped in classes such as `Success`, `Redirection`, etc... to avoid confusion as a response can be on both sides of the `Either`. This way you know for sure a `2XX` response is on the right side and the other ones on the left one.
 
 You can specify headers on your requests like this:
 
 ```php
 use Innmind\Http\{
     Headers,
-    Header\Header,
-    Header\Value\Value,
+    Header,
+    Header\Value,
 };
 
 $request = Request::of(
@@ -50,7 +50,7 @@ $request = Request::of(
     Method::get,
     ProtocolVersion::v11,
     Headers::of(
-        new Header('User-Agent', new Value('your custom user agent string')),
+        Header::of('User-Agent', Value::of('your custom user agent string')),
     ),
 );
 ```
@@ -63,6 +63,7 @@ You can always specify a body like so:
 ```php
 use Innmind\Filesystem\File\Content;
 use Innmind\Http\Header\ContentType;
+use Innmind\MediaType\MediaType;
 use Innmind\Json\Json;
 
 $request = Request::of(
@@ -70,13 +71,11 @@ $request = Request::of(
     Method::post,
     ProtocolVersion::v11,
     Headers::of(
-        ContentType::of('application', 'json'),
+        ContentType::of(new MediaType('application', 'json')),
     ),
-    Content::ofString(Json::encode(['some' => 'payload'])), #(1)
+    Content::ofString(Json::encode(['some' => 'payload'])),
 );
 ```
-
-1. see [`innmind/json`](../../packages.md#json)
 
 Here we send some json but you can send anything you want.
 
@@ -113,12 +112,12 @@ You apply this pattern via this decorator:
 
 ```php
 use Innmind\HttpTransport\CircuitBreaker;
-use Innmind\TimeContinuum\Earth\Period\Second;
+use Innmind\TimeContinuum\Period;
 
 $http = CircuitBreaker::of(
     $os->remote()->http(),
     $os->clock(),
-    Second::of(10),
+    Period::second(10),
 );
 ```
 
@@ -147,12 +146,12 @@ This will retry all errors `5XX` responses and connection failures at most 5 tim
     You can improve the resiliency of the whole operating system abstractions like this:
 
     ```php
-    use Innmind\OperatingSystem\OperatingSystem\Resilient;
+    use Innmind\OperatingSystem\Config\Resilient;
 
-    $os = Resilient::of($os);
+    $os = $os->map(Resilient::new());
     ```
 
-    Even though for now it only applies this strategy to the HTTP client, you future prood yourself by using this decorator.
+    Even though for now it only applies this strategy to the HTTP client, you future prood yourself by using this config.
 
 ## Traps
 

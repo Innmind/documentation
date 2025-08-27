@@ -213,7 +213,7 @@ So far we _do nothing_ in case our user doesn't have a brother. But what if we w
 
 ## In the ecosystem
 
-`Maybe` is used to express the abscence of data (1) or the possible failure of an operation (2). For the latter it is expressed via `Maybe<Innmind\Immutable\SideEffect>`, meaning if it contains a `SideEffect` the operation as succeeded otherwise it failed.
+`Maybe` is used to express the abscence of data (1). The possible failure of an operation (2) is expressed with a similar monad called `Attempt`. It is expressed via `Attempt<Innmind\Immutable\SideEffect>`, meaning if it contains a `SideEffect` the operation as succeeded otherwise it failed.
 {.annotate}
 
 1. Such as the absence of a [file on the filesystem](../operating-system/filesystem.md) or the absence of an [entity from a storage](../orm/index.md).

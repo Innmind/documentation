@@ -19,7 +19,8 @@ $process = $os
             ->withArgument('install')
             ->withArgument('cowsay')
             ->withShortOption('y'),
-    );
+    )
+    ->unwrap();
 $process
     ->wait()
     ->match(
@@ -41,14 +42,17 @@ This example waits for the installation of [`cowsay`](https://en.wikipedia.org/w
 If you dont't really care about the process failing or not and simply want to _forward_ its output you can use:
 
 ```php
-use Innmind\Server\Control\Server\Process\Output\Type;
+use Innmind\Server\Control\Server\Process\Output\{
+    Chunk,
+    Type,
+};
 use Innmind\Immutable\Str;
 
 $process
     ->output()
-    ->foreach(static function(Str $chunk, Type $type): void {
-        // $type is either Type::output or Type::error
-        echo $chunk->toString();
+    ->foreach(static function(Chunk $chunk): void {
+        // $chunk->type() is either Type::output or Type::error
+        echo $chunk->data()->toString();
     });
 ```
 
@@ -61,6 +65,7 @@ You can also send content to the `STDIN` of the process via:
 
 ```php
 use Innmind\Filesystem\File\Content;
+use Innmind\Immutable\Monoid\Concat;
 
 echo $os
     ->control()
@@ -69,7 +74,10 @@ echo $os
         Command::foreground('echo')
             ->withInput(Content::ofString('some input')),
     )
+    ->unwrap()
     ->output()
+    ->map(static fn(Chunk $chunk) => $chunk->data())
+    ->fold(new Concat)
     ->toString();
 ```
 
@@ -93,9 +101,10 @@ $os
             ->withArgument('some folder/')
             ->streamOutput(),
     )
+    ->unwrap()
     ->output()
-    ->foreach(static function(Str $chunk) {
-        echo $chunk->toString();
+    ->foreach(static function(Chunk $chunk) {
+        echo $chunk->data()->toString();
     });
 ```
 
@@ -120,7 +129,8 @@ $process = $os
         Command::foreground('apt-get')
             ->withArgument('install')
             ->withArgument('cowsay'),
-    );
+    )
+    ->unwrap();
 ```
 
 !!! note ""

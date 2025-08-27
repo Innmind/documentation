@@ -20,6 +20,7 @@ $boundary = Boundary::uuid();
 $_ = $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->get(Name::of('your file.txt'))
     ->flatMap(
         static fn($file) => $os
@@ -28,7 +29,7 @@ $_ = $os
                 Url::of('https://some-server.com/api/upload'),
                 Method::post,
                 ProtocolVersion::v11,
-                Headers::of(ContentType::of('multipart', 'form-data', $boundary)),
+                Headers::of($boundary->toHeader()),
                 Multipart::boundary($boundary)
                     ->withFile('some[file]', $file)
                     ->asContent(),

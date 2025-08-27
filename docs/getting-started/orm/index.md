@@ -8,12 +8,6 @@ This ORM focuses on simplifying data manipulation.
 ??? info
     Its monadic design allows it to be compatible with [Innmind's asynchronous context](../concurrency/async.md).
 
-## Installation
-
-```sh
-composer require formal/orm:~3.0
-```
-
 ## Example
 
 ```php
@@ -47,6 +41,6 @@ Since it focuses on usage and not _abstracting a persistence model_ this ORM all
 
 ## Advanced usage
 
-Full documentation available [here](https://formal-php.github.io/orm/).
+Full documentation available [here](https://formal-php.org/orm/).
 
 *[ORM]: Object Relational Mapping

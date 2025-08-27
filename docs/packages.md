@@ -73,7 +73,7 @@ $rgba = Colour::blue->toRGBA();
 Immutable objects to define cron jobs and install them on a machine (local or remote).
 
 ```sh
-composer require innmind/cron:~3.2
+composer require innmind/cron '~4.0'
 ```
 
 ```php
@@ -85,7 +85,7 @@ use Innmind\Server\Control\Server\Command;
 
 $install = Crontab::forUser(
     'admin',
-    new Job(
+    Job::of(
         Job\Schedule::everyDayAt(10, 30),
         Command::foreground('say hello'),
     ),
@@ -98,10 +98,6 @@ $install($os->control());
 ## Encoding
 
 Allows to `tar` [directories](getting-started/operating-system/filesystem.md) and `gzip` [files](getting-started/operating-system/filesystem.md) in a memory safe way.
-
-```sh
-composer require innmind/encoding:~1.0
-```
 
 ```php
 use Innmind\Filesystem\{
@@ -117,11 +113,12 @@ use Innmind\Encoding\{
 $tar = $os
     ->filesystem()
     ->mount(Path::of('some/directory/'))
+    ->unwrap()
     ->get(Name::of('data'))
     ->map(Tar::encode($os->clock()))
     ->map(Gzip::compress())
     ->match(
-        static fn(File $file) => $file,
+        static fn(File\Content $file) => $file,
         static fn() => null,
     );
 ```
@@ -131,10 +128,6 @@ $tar = $os
 ## Hash
 
 Allows to compute the hash of [files](getting-started/operating-system/filesystem.md) in a memory safe way.
-
-```sh
-composer require innmind/hash:~1.5
-```
 
 ```php
 use Innmind\Filesystem\Name;
@@ -148,6 +141,7 @@ use Innmind\Immutable\Set;
 $hash = $os
     ->filesystem()
     ->mount(Path::of('some-folder/'))
+    ->unwrap()
     ->get(Name::of('some-file'))
     ->map(Hash::sha512->ofFile(...))
     ->match(
@@ -162,12 +156,8 @@ $hash = $os
 
 Allows to parse HTML files to immutable objects (built on top of [XML](#xml)).
 
-```sh
-composer require innmind/html:~6.3
-```
-
 ```php
-use Innmind\Html\Reader\Reader;
+use Innmind\Html\Reader;
 use Innmind\HttpTransport\Success;
 use Innmind\Http\{
     Request,
@@ -176,9 +166,9 @@ use Innmind\Http\{
 };
 use Innmind\Url\Url;
 use Innmind\Xml\Node;
-use Innmind\Immutable\Maybe;
+use Innmind\Immutable\Attempt;
 
-$read = Reader::default();
+$read = Reader::new();
 
 $html = $os
     ->remote()
@@ -187,10 +177,10 @@ $html = $os
         Method::get,
         ProtocolVersion::v11,
     ))
-    ->maybe()
+    ->attempt(static fn() => new \RuntimeException)
     ->map(static fn(Success $success) => $success->response()->body())
     ->flatMap($read);
-$html; // instance of Maybe<Node>
+$html; // instance of Attempt<Node>
 ```
 
 [Repository](https://github.com/Innmind/Html)
@@ -207,30 +197,12 @@ Object approach to handle HTTP sessions without a global state.
 
 [Repository](https://github.com/Innmind/HttpSession)
 
-## Json
-
-Type safe functions to encode/decode JSON to prevent unseen errors.
-
-```sh
-composer require innmind/json:~1.4
-```
-
-```php
-use Innmind\Json\Json;
-
-Json::encode(['foo' => 'bar']); // {"foo":"bar"}
-Json::decode('{"foo":"bar"}'); // ['foo' => 'bar']
-Json::decode('{]'); // will throw an exception (instead of returning false)
-```
-
-[Repository](https://github.com/Innmind/Json)
-
 ## Log reader
 
 Allows to read Apache access and Monolog logs into immutable objects in a memory safe way.
 
 ```sh
-composer require innmind/log-reader:~5.3
+composer require innmind/log-reader '~5.4'
 ```
 
 ```php
@@ -253,6 +225,7 @@ $read = Reader::of(
 $os
     ->filesystem()
     ->mount(Path::of('var/logs/'))
+    ->unwrap()
     ->get(Name::of('prod.log'))
     ->keep(Instance::of(File::class))
     ->map(static fn($file) => $file->content())
@@ -290,7 +263,7 @@ Object API on top of the `rabbitmqadmin` CLI command.
 Allows to parse `robots.txt` files.
 
 ```sh
-composer require innmind/robots-txt:~6.2
+composer require innmind/robots-txt '~6.3'
 ```
 
 ```php
@@ -335,7 +308,7 @@ use Innmind\Url\Path;
 $provide = Cache::of(
     Merge::of(
         Local::of(
-            $os->filesystem()->mount(Path::of($_SERVER['USER'].'/.ssh/')),
+            $os->filesystem()->mount(Path::of($_SERVER['USER'].'/.ssh/'))->unwrap(),
         ),
         Github::of(
             $os->remote()->http(),
@@ -376,15 +349,9 @@ $url = $resolve(
 
 This is a monadic approach to data validation.
 
-```sh
-composer require innmind/validation:~1.4
-```
-
 ```php
 use Innmind\Validation\{
-    Shape,
     Is,
-    Each,
     Failure,
 };
 use Innmind\Immutable\Sequence;
@@ -407,7 +374,7 @@ $invalid = [
     'submit' => true,
 ];
 
-$validate = Shape::of('id', Is::int())
+$validate = Is::shape('id', Is::int())
     ->with('username', Is::string())
     ->with(
         'addresses',
@@ -456,13 +423,9 @@ $errors = $validate($invalid)->match(
 
 Allows to parse XML files to immutable objects.
 
-```sh
-composer require innmind/xml:~7.5
-```
-
 ```php
 use Innmind\Xml\{
-    Reader\Reader,
+    Reader,
     Node,
 };
 use Innmind\Filesystem\File\Content;

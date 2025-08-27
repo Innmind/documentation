@@ -19,6 +19,7 @@ If you've seen modern Java, C#, Rust, Swift and co you should find Innmind very 
     $os
         ->filesystem()
         ->mount(Path::of('somewhere/data/'))
+        ->unwrap()
         ->get(Name::of('avatars'))
         ->keep(Instance::of(Directory::class))
         ->map(

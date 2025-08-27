@@ -1,9 +1,5 @@
 # Persist crawled links to a database
 
-```sh
-composer require innmind/html:~6.3
-```
-
 ```php
 use Innmind\Http\{
     Request,
@@ -11,7 +7,7 @@ use Innmind\Http\{
     ProtocolVersion,
 };
 use Innmind\Html\{
-    Reader\Reader,
+    Reader,
     Visitor\Elements,
     Element\A,
 };
@@ -23,7 +19,7 @@ use Formal\AccessLayer\{
     Row,
 };
 
-$read = Reader::default();
+$read = Reader::new();
 $sql = $os
     ->remote()
     ->sql(Url::of('mysql://127.0.0.1:3306/database_name'));
@@ -35,11 +31,11 @@ $_ = $os
         Method::get,
         ProtocolVersion::v11,
     ))
-    ->maybe()
+    ->attempt(static fn() => new \RuntimeException)
     ->map(static fn($success) => $success->response()->body())
     ->flatMap($read)
+    ->maybe()
     ->toSequence()
-    ->toSet()
     ->flatMap(Elements::of('a'))
     ->keep(Instance::of(A::class))
     ->map(static fn(A $a) => $a->href()->toString())
