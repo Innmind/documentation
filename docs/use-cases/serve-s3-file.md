@@ -8,8 +8,9 @@ composer require innmind/s3 '~5.0'
 use Innmind\Framework\{
     Application,
     Main\Http,
-    Http\To,
+    Http\Route,
 };
+use Innmind\DI\Service;
 use Innmind\S3;
 use Innmind\Filesystem\{
     Adapter,
@@ -24,43 +25,55 @@ use Innmind\Http\{
 };
 use Innmind\MediaType\MediaType;
 use Innmind\Url\Url;
+use Innmind\Immutable\Attempt;
+
+enum Services implements Service
+{
+    case s3;
+    case serve;
+}
 
 new class extends Http {
     protected function configure(Application $app): Application
     {
         return $app
-            ->service('s3', static fn($_, $os) => S3\Filesystem\Adapter::of(
+            ->service(Services::s3, static fn($_, $os) => S3\Filesystem\Adapter::of(
                 S3\Factory::of($os)->build(
                     Url::of('https://acces_key:acces_secret@bucket-name.s3.region-name.scw.cloud/'),
                     S3\Region::of('region-name'),
                 ),
             ))
-            ->service('serve', static fn($get) => new class($get('s3')) {
+            ->service(Services::serve, static fn($get) => new class($get('s3')) {
                 public function __construct(private Adapter $s3){}
 
-                public function __invoke(ServerRequest $request): Response
+                public function __invoke(ServerRequest $request): Attempt
                 {
-                    return $this
-                        ->s3
-                        ->get(Name::of('some file.txt'))
-                        ->match(
-                            static fn($file) => Response::of(
-                                StatusCode::ok,
-                                $request->protocolVersion(),
-                                Headers::of(ContentType::of(new MediaType(
-                                    $file->mediaType()->topLevel(),
-                                    $file->mediaType()->subType(),
-                                ))),
-                                $file->content(),
+                    return Attempt::result(
+                        $this
+                            ->s3
+                            ->get(Name::of('some file.txt'))
+                            ->match(
+                                static fn($file) => Response::of(
+                                    StatusCode::ok,
+                                    $request->protocolVersion(),
+                                    Headers::of(ContentType::of(new MediaType(
+                                        $file->mediaType()->topLevel(),
+                                        $file->mediaType()->subType(),
+                                    ))),
+                                    $file->content(),
+                                ),
+                                static fn() => Response::of(
+                                    StatusCode::notFound,
+                                    $request->protocolVersion(),
+                                ),
                             ),
-                            static fn() => Response::of(
-                                StatusCode::notFound,
-                                $request->protocolVersion(),
-                            ),
-                        );
+                    );
                 }
             })
-            ->route('GET /', To::service('serve'));
+            ->route(Route::get(
+                '/',
+                Services::serve,
+            ));
     }
 };
 ```

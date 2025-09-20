@@ -31,15 +31,19 @@ You can specify a command like so:
 use Innmind\CLI\{
     Console,
     Command,
+    Command\Usage,
 };
-use Innmind\Immutable\Str;
+use Innmind\Immutable\{
+    Attempt,
+    Str,
+};
 
 new class extends Cli {
     protected function configure(Application $app): Application
     {
         return $app->command(
             static fn() => new class implements Command {
-                public function __invoke(Console $console): Console
+                public function __invoke(Console $console): Attempt
                 {
                     return $console->output(
                         Str::of('Hello ')->append(
@@ -48,9 +52,9 @@ new class extends Cli {
                     );
                 }
 
-                public function usage(): string
+                public function usage(): Usage
                 {
-                    return 'greet name';
+                    return Usage::of('greet')->argument('name');
                 }
             },
         );
@@ -68,16 +72,12 @@ You can now do `php bin/console greet John` to print `Hello John`.
 
     ```php
     use Innmind\DI\Container;
-    use Innmind\OperatingSystem\OperatingSystem;
-    use Innmind\Framework\Environment;
     use Innmind\CLI\Command;
 
-    static fn(Container $container, OperatingSystem $os, Environment $env): Command;
+    static fn(Container $container): Command;
     ```
 
     - `$container` is a service locator
-    - `$os` you've seen it in a previous chapter
-    - `$env` contains the environment variables
 
 You can add as many commands as you wish by chaining calls to the `command` method.
 
@@ -96,7 +96,7 @@ new class extends Cli {
                         private Command $inner,
                     ) {}
 
-                    public function __invoke(Console $console): Console
+                    public function __invoke(Console $console): Attempt
                     {
                         // you can execute code before here
                         $console = ($this->inner)($console);
