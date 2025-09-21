@@ -24,4 +24,4 @@ You'll see in the following chapters all the ways you can use this object.
 
 ## Advanced usage
 
-Full documentation available [here](https://innmind.github.io/OperatingSystem/).
+Full documentation available [here](https://innmind.org/OperatingSystem/).

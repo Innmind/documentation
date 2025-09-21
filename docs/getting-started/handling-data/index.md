@@ -8,4 +8,4 @@ You'll learn how to them for simple cases and how they become indispensable as a
 
 ## Advanced usage
 
-Full documentation available [here](http://innmind.github.io/Immutable/).
+Full documentation available [here](https://innmind.org/Immutable/).

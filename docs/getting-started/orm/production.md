@@ -55,7 +55,7 @@ This code automatically execute the queries to create the tables. You could inst
 1. `#!php $_ = $show(User::class)->foreach(var_dump(...));`
 
 ??? tip
-    You can use [`formal/migrations`](https://formal-php.github.io/migrations/) to run your migrations.
+    You can use [`formal/migrations`](https://formal-php.org/migrations/) to run your migrations.
 
 ## Elasticsearch
 
