@@ -1,5 +1,8 @@
 # Profiler
 
+!!! warning
+    This section is not yet compatible with the latest major version of the framework.
+
 Innmind comes with an optional profiler to help you debug your program.
 
 !!! success ""
