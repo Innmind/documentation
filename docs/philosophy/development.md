@@ -10,7 +10,7 @@ To make sure you use Innmind correctly you should use it as well.
 
 All packages use [Semver](https://semver.org) to release new versions.
 
-All minor and bugfix versions are retro compatible and try as mush as possible to not change your program's behaviour. Most updates bring new code that you have to choose to use it (or not).
+All minor and bugfix versions are backward compatible and try as much as possible to not change your program's behaviour. Most updates bring new code that you have to choose to use it (or not).
 
 Major updates break the API.
 

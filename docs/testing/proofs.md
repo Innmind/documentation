@@ -16,9 +16,9 @@ Application::new([])
         yield proof(
             'add',
             given(
-                Set\Elements::of(1),
-                Set\Elements::of(2),
-                Set\Elements::of(3),
+                Set::of(1),
+                Set::of(2),
+                Set::of(3),
             ),
             static fn(Assert $assert, int $a, int $b, int $expected) => $assert
                 ->expected($expected)
@@ -46,7 +46,7 @@ Application::new([])
         yield proof(
             'add',
             given(
-                Set\Elements::of(
+                Set::of(
                     [1, 2, 3],
                     [2, 3, 5],
                 ),
@@ -78,8 +78,8 @@ Application::new([])
         yield proof(
             'add is commutative',
             given(
-                Set\Integers::any(),
-                Set\Integers::any(),
+                Set::integers(),
+                Set::integers(),
             ),
             static fn(Assert $assert, int $a, int $b) => $assert->same(
                 add($a, $b),
@@ -89,9 +89,9 @@ Application::new([])
         yield proof(
             'add is cumulative',
             given(
-                Set\Integers::any(),
-                Set\Integers::any(),
-                Set\Integers::any(),
+                Set::integers(),
+                Set::integers(),
+                Set::integers(),
             ),
             static fn(Assert $assert, int $a, int $b, int $c) => $assert->same(
                 add($a, add($b, $c)),
@@ -100,7 +100,7 @@ Application::new([])
         );
         yield proof(
             '0 is an identity value',
-            given(Set\Integers::any()),
+            given(Set::integers()),
             static fn(Assert $assert, int $a) => $assert->same(
                 $a,
                 add($a, 0), #(1)

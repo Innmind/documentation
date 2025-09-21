@@ -28,24 +28,38 @@ You can expose this server via `cd public/ && php -S localhost:8080`. If you run
 You can define a route like this:
 
 ```php title="public/index.php"
+use Innmind\Framework\Http\Route;
 use Innmind\Http\{
     ServerRequest,
     Response,
 };
 use Innmind\Filesystem\File\Content;
+use Innmind\Immutable\Attempt;
+
+enum Services implements Service
+{
+    case hello;
+}
 
 new class extends Http {
     protected function configure(Application $app): Application
     {
-        return $app->route(
-            'GET /',
-            static fn(ServerRequest $request) => Response::of(
-                Response\StatusCode::ok,
-                $request->protocolVersion(),
-                null,
-                Content::ofString('Hello world'),
-            ),
-        );
+        return $app
+            ->service(
+                Services::hello,
+                static fn() => static fn(ServerRequest $request) => Attempt::result(
+                    Response::of(
+                        Response\StatusCode::ok,
+                        $request->protocolVersion(),
+                        null,
+                        Content::ofString('Hello world'),
+                    ),
+                ),
+            )
+            ->route(Route::get(
+                '/',
+                Services::hello,
+            );
     }
 };
 ```
@@ -54,24 +68,26 @@ Now `curl http://localhost:8080/` will return a `200` response with the content 
 
 You can specify placeholders in your routes like this:
 
-```php title="public/index.php" hl_lines="1 7 10 15"
-use Innmind\Router\Route\Variables;
-
+```php title="public/index.php" hl_lines="7 12 17"
 new class extends Http {
     protected function configure(Application $app): Application
     {
-        return $app->route(
-            'GET /greet/{name}',
-            static fn(
-                ServerRequest $request,
-                Variables $variables
-            ) => Response::of(
-                Response\StatusCode::ok,
-                $request->protocolVersion(),
-                null,
-                Content::ofString('Hello '.$variables->get('name')),
-            ),
-        );
+        return $app
+            ->service(
+                Services::hello,
+                static fn() => static fn(ServerRequest $request, string $name) => Attempt::result(
+                    Response::of(
+                        Response\StatusCode::ok,
+                        $request->protocolVersion(),
+                        null,
+                        Content::ofString("Hello $name"),
+                    ),
+                ),
+            )
+            ->route(Route::get(
+                '/greet/{name}',
+                Services::hello,
+            );
     }
 };
 ```
@@ -85,56 +101,45 @@ new class extends Http {
     The full definition of the function passed to the `route` method is:
 
     ```php
-    use Innmind\Http\{
-        ServerRequest,
-        Response,
+    use Innmind\Router\{
+        Component,
+        Pipe,
     };
-    use Innmind\Router\Route\Variables;
     use Innmind\DI\Container;
-    use Innmind\OperatingSystem\OperatingSystem;
-    use Innmind\Framework\Environment;
 
     static fn(
-        ServerRequest $request
-        Variable $variables,
+        Pipe $pipe
         Container $container,
-        OperatingSystem $os,
-        Environment $env
-    ): Response;
+    ): Component;
     ```
 
-    - `$request` is the parsed request sent by a user
-    - `$variables` gathers all the values described by the route template
+    - `$pipe` is a factory to help build routes
     - `$container` is a service locator
-    - `$os` you've seen it in a previous chapter
-    - `$env` contains the environment variables
 
 ## Composition
 
 You can decorate all routes to execute some code on every route like this:
 
 ```php title="public/index.php"
-use Innmind\Framework\Http\RequestHandler;
-
 new class extends Http {
     protected function configure(Application $app): Application
     {
         return $app
-            ->mapRequestHandler(
-                static fn(RequestHandler $route) => new class($route) implements RequestHandler {
-                    public function __construct(
-                        private RequestHandler $inner,
-                    ) {}
+            ->mapRoute(
+                static fn(Component $route) => Component::of(static function(
+                    ServerRequest $request,
+                    mixed $input,
+                ) {
+                    // you can execute code before here
 
-                    public function __invoke(ServerRequest $request): Response
-                    {
-                        // you can execute code before here
-                        $response = ($this->inner)($request);
+                    return Attempt::result($input);
+                })
+                    ->pipe($route)
+                    ->pipe(Component::of(static function($request, $response) {
                         // you can execute code after here
 
-                        return $response;
-                    }
-                }
+                        return Attempt::result($response);
+                    })),
             )
             ->route(/* ... */)
             ->route(/* ... */)

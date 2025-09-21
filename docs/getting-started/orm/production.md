@@ -55,7 +55,7 @@ This code automatically execute the queries to create the tables. You could inst
 1. `#!php $_ = $show(User::class)->foreach(var_dump(...));`
 
 ??? tip
-    You can use [`formal/migrations`](https://formal-php.github.io/migrations/) to run your migrations.
+    You can use [`formal/migrations`](https://formal-php.org/migrations/) to run your migrations.
 
 ## Elasticsearch
 
@@ -145,7 +145,7 @@ You should this storage for small programs without much concurrency that you nee
 First you need to require the S3 package:
 
 ```sh
-composer require innmind/s3:~4.1
+composer require innmind/s3 '~5.0'
 ```
 
 Then configure the ORM:

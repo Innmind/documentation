@@ -1,11 +1,10 @@
 # Creating an archive of a directory
 
-```sh
-composer require innmind/encoding:~1.0
-```
-
 ```php
-use Innmind\Filesystem\Name;
+use Innmind\Filesystem\{
+    Name,
+    File\Content,
+};
 use Innmind\Url\Path;
 use Innmind\Encoding\{
     Gzip,
@@ -15,11 +14,12 @@ use Innmind\Encoding\{
 $tar = $os
     ->filesystem()
     ->mount(Path::of('some/directory/'))
+    ->unwrap()
     ->get(Name::of('data'))
     ->map(Tar::encode($os->clock()))
     ->map(Gzip::compress())
     ->match(
-        static fn($file) => $file,
+        static fn(Content $file) => $file,
         static fn() => throw new \RuntimeException('Data not found'),
     );
 ```

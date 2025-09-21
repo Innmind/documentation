@@ -89,8 +89,8 @@ use Innmind\Immutable\Either;
 $repository = $orm->repository(User::class);
 $orm->transactional(
     static function() use ($repository) {
-        $repository->put(User::new('john'));
-        $repository->put(User::new('jane'));
+        $repository->put(User::new('john'))->unwrap();
+        $repository->put(User::new('jane'))->unwrap();
 
         return Either::right(null);
     },
@@ -118,8 +118,8 @@ $jane = User::new('jane')->addAddress($address);
 $repository = $orm->repository(User::class);
 $orm->transactional(
     static function() use ($repository, $john, $jane) {
-        $repository->put($john);
-        $repository->put($jane);
+        $repository->put($john)->unwrap();
+        $repository->put($jane)->unwrap();
 
         return Either::right(null);
     },
@@ -161,7 +161,7 @@ $orm->transactional(
                 new Address('somewhere', 'SW9 9SL', 'London'),
             ))
             ->match(
-                static fn(User $user) => $repository->put($user),
+                static fn(User $user) => $repository->put($user)->unwrap(),
                 static fn() => null,
             );
 
@@ -177,7 +177,7 @@ The benefit here is that you can't persist data by accident. All modifications t
 ```php
 $orm->transactional(
     static function() use ($repository) {
-        $repository->remove(Id::of(User::class, 'some-uuid'));
+        $repository->remove(Id::of(User::class, 'some-uuid'))->unwrap();
 
         return Either::right(null);
     },

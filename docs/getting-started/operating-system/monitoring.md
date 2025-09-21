@@ -68,7 +68,8 @@ On each volume you have access to its mount point and its usage. The values are 
 ```php
 $cpu = $os
     ->status()
-    ->cpu();
+    ->cpu()
+    ->unwrap();
 ```
 
 On `$cpu` you have access to a snapshot of the percentage of cpu used by the user or the system. You also have access to the number of cores available, you can use this information to adapt your program if you want to start child processes.
@@ -78,7 +79,8 @@ On `$cpu` you have access to a snapshot of the percentage of cpu used by the use
 ```php
 $memory = $os
     ->status()
-    ->memory();
+    ->memory()
+    ->unwrap();
 ```
 
 On `$memory` you have access to a snapshot of the memory used, the swap used and the total memory available.
@@ -88,7 +90,8 @@ On `$memory` you have access to a snapshot of the memory used, the swap used and
 ```php
 $load = $os
     ->status()
-    ->loadAverage();
+    ->loadAverage()
+    ->unwrap();
 $load->lastMinute();
 $load->lastFiveMinutes();
 $load->lastFifteenMinutes();

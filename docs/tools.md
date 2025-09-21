@@ -58,6 +58,10 @@ Instead of manually executing the CLI commands you can use this [macOS app](http
 
 ![](assets/dependency-graph/macOS-app.png)
 
+### Website
+
+The macOS App is also available as a website at <http://innmind.net>.
+
 ## Lab station
 
 This tool automatically runs your tests, psalm and code style checker everytime you save a file.

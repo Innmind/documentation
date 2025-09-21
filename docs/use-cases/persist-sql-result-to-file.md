@@ -23,6 +23,7 @@ $sql = $os
 $_ = $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->add(File::named(
         'results.csv',
         Content::ofLines(
@@ -35,7 +36,8 @@ $_ = $os
                 ->map(Str::of(',')->join(...))
                 ->map(Line::of(...)),
         ),
-    ));
+    ))
+    ->unwrap();
 ```
 
 Since the sql query is lazy (thanks to `::onDemand()`) you can persist a very long result without loading everything in memory.

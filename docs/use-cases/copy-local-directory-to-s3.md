@@ -1,7 +1,7 @@
 # Copy a local directory to S3
 
 ```sh
-composer require innmind/s3:~4.1
+composer require innmind/s3 '~5.0'
 ```
 
 ```php
@@ -20,6 +20,7 @@ $s3 = S3\Filesystem\Adapter::of($bucket);
 $directory = $os
     ->filesystem()
     ->mount(Path::of('some directory/'))
+    ->unwrap()
     ->root();
-$s3->add($directory);
+$s3->add($directory)->unwrap();
 ```

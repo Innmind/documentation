@@ -2,12 +2,6 @@
 
 This package allows you to build scripts in a more structured way.
 
-## Installation
-
-```sh
-composer require innmind/cli:~3.6
-```
-
 ## Usage
 
 ```php title="cli.php"
@@ -21,9 +15,10 @@ use Innmind\CLI\{
     Environment,
 };
 use Innmind\OperatingSystem\OperatingSystem;
+use Innmind\Immutable\Attempt;
 
 new class extends Main {
-    protected function main(Environment $env, OperatingSystem $os): Environment
+    protected function main(Environment $env, OperatingSystem $os): Attempt
     {
         return $env->output(Str::of("Hello world\n"));
     }
@@ -36,7 +31,7 @@ You should already be familiar with the `$os` variable by now, if not go the [de
 
 The `$env` variable is the abstraction to deal with everything inputed in your script and every output that comes out. It behaves like an immutable object, meaning you **must** always use the new instance returned by its methods.
 
-To change the returned exit code you can do `return $env->exit(1)`.
+To change the returned exit code you can do `$env->exit(1)`.
 
 If you only have one action in your script you can do everything in the `main` method. But if you want to expose multiple commands you can do:
 
@@ -45,14 +40,16 @@ use Innmind\CLI\{
     Commands,
     Console,
     Command,
+    Command\Usage,
 };
+use Innmind\Immutable\Attempt;
 
 new class extends Main {
     protected function main(Environment $env, OperatingSystem $os): Environment
     {
         $commands = Commands::of(
             new class implements Command {
-                public function __invoke(Console $console): Console
+                public function __invoke(Console $console): Attempt
                 {
                     return $console->output(
                         Str::of('Hello ')->append(
@@ -61,13 +58,13 @@ new class extends Main {
                     );
                 }
 
-                public function usage(): string
+                public function usage(): Usage
                 {
-                    return 'greet name';
+                    return Usage::parse('greet name');
                 }
             },
             new class implements Command {
-                public function __invoke(Console $console): Console
+                public function __invoke(Console $console): Attempt
                 {
                     return $console->output(
                         Str::of($console->arguments()->get('name'))
@@ -76,9 +73,9 @@ new class extends Main {
                     );
                 }
 
-                public function usage(): string
+                public function usage(): Usage
                 {
-                    return 'shout name';
+                    return Usage::parse('shout name');
                 }
             },
         );
@@ -92,3 +89,7 @@ If you run `php cli.php greet Jane` it will output `Hello Jane` and if you run `
 
 ??? info
     For simplicity this example use anonymous classes but you can use any class as long as it implements `Command`.
+
+## Advanced usage
+
+Full documentation available [here](http://innmind.org/CLI/).

@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-composer require innmind/framework:~2.2
+composer require innmind/framework:~3.0
 ```
 
 ## Concepts
@@ -19,4 +19,4 @@ The other advantage of this approach is that if your program is accessible from 
 
 ## Advanced usage
 
-The framework offers more than the features shown in this documentation, after reading the following chapters you should head to the [package](https://github.com/Innmind/framework/) to learn the extent of its capabilities.
+The framework offers more than the features shown in this documentation, after reading the following chapters you should head to the [package](https://innmind.org/framework/) to learn the extent of its capabilities.

@@ -5,7 +5,10 @@ Let's say you want to start the PHP HTTP server to starting sending requests to 
 You can do so with:
 
 ```php
-use Innmind\Server\Control\Server\Command;
+use Innmind\Server\Control\Server\{
+    Command,
+    Process\Output\Chunk,
+};
 use Innmind\Immutable\Str;
 
 $process = $os
@@ -15,11 +18,11 @@ $process = $os
         Command::foreground('php')
             ->withShortOption('S')
             ->withArgument('localhost:8080'),
-    );
+    )
+    ->unwrap();
 $process
     ->output()
-    ->chunks()
-    ->map(static fn(array $chunk) => $chunk[0])
+    ->map(static fn(Chunk $chunk) => $chunk->data())
     ->takeWhile(static fn(Str $chunk) => !$chunk->contains('started'))
     ->memoize();
 

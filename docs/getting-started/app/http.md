@@ -2,12 +2,6 @@
 
 This package allows to build simple HTTP applications by representing requests and responses via objects.
 
-## Installation
-
-```sh
-composer require innmind/http-server:~4.1
-```
-
 ## Usage
 
 ```php title="index.php"
@@ -53,6 +47,7 @@ use Innmind\Http\{
     Headers,
     Header\ContentType,
 };
+use Innmind\MediaType\MediaType;
 use Innmind\Url\Path;
 use Innmind\Immutable\Predicate\Instance;
 
@@ -70,12 +65,13 @@ new class extends Main {
             Response\StatusCode::ok,
             $request->protocolVersion(),
             Headers::of(
-                ContentType::of('image', 'png'),
+                ContentType::of(new MediaType('image', 'png')),
             ),
             $this
                 ->os
                 ->filesystem()
                 ->mount(Path::of('images/'))
+                ->unwrap()
                 ->get(Name::of('some-image.png'))
                 ->keep(Instance::of(File::class))
                 ->match(
